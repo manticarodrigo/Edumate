@@ -5,6 +5,6 @@ module.exports = function(server) {
     	// the primary socket at '/' 
     });
  
-    var todos = require('./todos.ws.js')(io);
+    var users = require('./users.ws.js')(io);
     return io;
 }
