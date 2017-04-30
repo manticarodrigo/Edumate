@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 
-
 @Injectable()
 export class SocketService {
   socketObserver: any; 
@@ -63,13 +62,17 @@ export class SocketService {
         console.log(coll.subscribers[mthd]);
           _s.on(mthd, coll.subscribers[mthd]);
       });
+      self.collections = {};
       self.collections[name] = _s;
     });
   }
 
   saveTodo(todo) {
     console.log('in saveTodo and socket is: ', this.socket);
-    this.collections['todos'].emit('saveTodo', todo);
+    this.collections['todos'].emit('saveTodo', {
+      id: Math.ceil(Math.random() * 1000),
+      name: todo
+    });
     // this.socketObserver.next({ category: 'saveTodo', todo: todo });
   }
 
