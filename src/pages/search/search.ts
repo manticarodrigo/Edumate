@@ -9,16 +9,50 @@ import { SocketService } from '../../providers/socket-service';
   templateUrl: 'search.html',
 })
 export class Search {
-  todo = '';
+  todo = {
+    id: null,
+    name: ''
+  };
+  todos: any;
 
-  constructor(private navCtrl: NavController,
-              private navParams: NavParams,
-              private socketS: SocketService) {
+  constructor(public navCtrl: NavController,
+              private socketService: SocketService) {
+    this.socketService.addCollection('todos');
+    this.socketService.addSubscription('todos', 'allTodos')
+    .subscribe(data => {
+      console.log("Component received todos : ");
+      console.log(data);
+      if (data) {
+        this.todos = data;
+      } else {
+        this.todos = null;
+      }
+    });
   }
 
   saveTodo() {
-    this.socketS.saveTodo(this.todo);
-    this.todo = '';
+    let self = this;
+    console.log('in saveTodo and socket is: ', this.socketService.socket);
+    if (!this.todo.id) {
+      this.todo.id = Math.ceil(Math.random() * 1000);
+    }
+    this.socketService.pubData('todos', 'saveTodo', this.todo, function(savedToLocal) {
+        console.log('savedToLocal : ', savedToLocal);
+        self.todo = {
+          id: null,
+          name: ''
+        };
+    });
+  }
+
+  removeTodo(todo) {
+    this.socketService.pubData('todos', 'deleteTodo', todo, function(savedToLocal) {
+        console.log('savedToLocal : ', savedToLocal);
+    });
+  }
+
+  editTodo(todo) {
+    this.todo = todo;
   }
 
 }

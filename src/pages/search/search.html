@@ -7,9 +7,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content text-center padding>
 
-  <ion-input [(ngModel)]="todo" placeholder="Todo"></ion-input>
-  <button ion-button (click)="saveTodo()">Save</button>
-
+  <ion-input [(ngModel)]="todo.name" placeholder="Todo name"></ion-input>
+  <button ion-button (click)="saveTodo()">SAVE</button>
+  <ion-list *ngIf="todos">
+    <ion-item *ngFor="let todo of todos" (click)="editTodo(todo)">
+      {{ todo.name }}
+    </ion-item>
+  </ion-list>
 </ion-content>

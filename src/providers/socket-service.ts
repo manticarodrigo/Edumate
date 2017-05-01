@@ -1,85 +1,95 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  socketObserver: any; 
-  socketService: any;
+  observables: any;
   collections: any;
   port = 'http://localhost:2000';
   socket: any;
+  isConnectionAlive = false;
 
   constructor() {
-    this.socketService = Observable.create(observer => {
-      this.socketObserver = observer;
-    });
+    this.collections = {};
   }
 
-
-  initialize() {
+  init() {
     console.log("Initializing sockets...");
-    let self = this;
+    
     this.socket = io.connect(this.port);
 
     this.socket.on("connect", (msg) => {
       console.log('on connect');
-      // self.socketObserver.next({ category: 'connect', message: 'user connected'});
+      this.isConnectionAlive = true;
     });
 
     this.socket.on("reconnecting", (msg) => {
       console.log('on reconnecting');
+      this.isConnectionAlive = false;
     });
 
     this.socket.on("reconnect_error", (msg) => {
       console.log('on reconnect_error');
+      this.isConnectionAlive = false;
     });
     
     this.socket.on("reconnect_failed", (msg) => {
       console.log('on reconnect_failed');
+      this.isConnectionAlive = false;
     });
 
     this.socket.on('disconnect', function () {
       console.log('user disconnected');
-      // io.emit('user disconnected');
+      this.isConnectionAlive = false;
     });
+  }
 
-    // "Sub-Socket" for each collection
-    var c = [
-      {
-      'name': 'todos',
-      'subscribers': {
-          'allTodos': this.renderAllTodos
-      },
-    }];
-    c.forEach(coll => {
-      var name = coll.name;
-      var _s = io.connect(self.port + '/' + name);
-      console.log(Object.keys(coll.subscribers));
-      Object.keys(coll.subscribers).forEach(mthd => {
-        console.log(coll.subscribers[mthd]);
-          _s.on(mthd, coll.subscribers[mthd]);
+  addCollection(name) {
+    // Create a "Sub-Socket" for each collection
+    var _s = io.connect(this.port + '/' + name);
+    this.collections[name] = _s;
+  }
+
+  addSubscription(coll, name) {
+    let self = this;
+    let observable = new Observable(observer => {
+      self.collections[coll].on(name, (data) => {
+        observer.next(data);
       });
-      self.collections = {};
-      self.collections[name] = _s;
     });
+    return observable;
   }
 
-  saveTodo(todo) {
-    console.log('in saveTodo and socket is: ', this.socket);
-    this.collections['todos'].emit('saveTodo', {
-      id: Math.ceil(Math.random() * 1000),
-      name: todo
-    });
-    // this.socketObserver.next({ category: 'saveTodo', todo: todo });
+  pubData(collection, endpoint, data, callback) {
+      let self = this;
+      if (self.isConnectionAlive) {
+        console.log("Emitting data at endpoint : " + collection + "/" + endpoint);
+        self.collections[collection].emit(endpoint, data);
+      } else {
+        console.log("Saving data at endpoint to local storage : " + collection + "/" + endpoint);
+        this.saveToLocalStorage(collection, {
+            "endpoint": endpoint,
+            "data": data
+        });
+      }
+      callback(!this.isConnectionAlive);
   }
 
-  renderAllTodos(data) {
-    console.log('socket returned data');
-    console.log(data);
-    // this.socketObserver.next({ category: 'message', message: msg });
+  saveToLocalStorage(collection, data) {
+      var savedData = this.getFromLocalStorage(collection);
+      var ls = savedData || [];
+      ls.push(data);
+      localStorage.setItem(collection, JSON.stringify(ls));
+  }
+
+  clearCollection(collection) {
+      localStorage.setItem(collection, null);
+  }
+
+  getFromLocalStorage(collection) {
+      return JSON.parse(localStorage.getItem(collection));
   }
 
 }
