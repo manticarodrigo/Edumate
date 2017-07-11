@@ -4,17 +4,6 @@ $font-path: "../assets/fonts";
 
 @import "ionic.globals";
 
-
-// Shared Variables
-// --------------------------------------------------
-// To customize the look and feel of this app, you can override
-// the Sass variables found in Ionic's source scss files.
-// To view all the possible Ionic variables, see:
-// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
-
-
-
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -25,14 +14,22 @@ $font-path: "../assets/fonts";
 
 $colors: (
   primary:    #0D99FC,
-  darker:  #0288D1,
-  lighter: #B3E5FC,
-  red:     #FF5252,
-  dark-red: #D54547,
-  green:      #4FD689,
-  dark-green:       #41AF73,
-  light-gray: #F5F5F5
+  primary-darker:  #0288D1,
+  primary-lighter: #B3E5FC,
+  secondary:      #4FD689,
+  secondary-darker:       #41AF73,
+  danger:     #FF5252,
+  dark-darker: #D54547,
+  light: #F5F5F5
 );
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
 
 
 // App iOS Variables

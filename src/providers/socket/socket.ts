@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
 @Injectable()
-export class SocketService {
+export class SocketProvider {
   observables: any;
   collections: any;
   port = 'http://localhost:8000';

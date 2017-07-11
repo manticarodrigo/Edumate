@@ -1,3 +1,52 @@
 page-login {
-
+  .scroll-content {
+    background-color: color($colors, primary);
+  }
+  .center {
+    max-width: 300px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    left: 0;
+    margin: auto;
+    .logo {
+      width: 150px;
+      margin-bottom: 16px;
+    }
+    .login-form {
+      .segment {
+        background-color: color($colors, primary-darker);
+        border-radius: 5px;
+        .segment-button {
+          background-color: rgba(255,255,255,0);
+          color: #fff;
+          border-bottom: none;
+        }
+        .segment-activated {
+          box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+          background-color: color($colors, primary);
+          border-bottom: 2px solid rgba(255,255,255,0.25);
+          border-radius: 5px;
+        }
+      }
+      .list {
+        margin: 10px 0px;
+        .label {
+          margin-left: 20px;
+        }
+        .item-input.ng-valid.input-has-value::after {
+          border-bottom-color: transparent !important;
+        }
+      }
+      .login-button {
+        border-radius: 5px;
+        background-color: color($colors, secondary);
+      }
+      .login-button:hover {
+        background-color: color($colors, secondary-darker);
+      }
+    }
+  }
 }

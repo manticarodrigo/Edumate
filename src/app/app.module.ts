@@ -3,14 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Edumate } from './app.component';
 
+import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { SocketService } from '../providers/socket-service';
-
 import { TabsPage } from '../pages/tabs/tabs';
 
-import { IonicStorageModule } from '@ionic/storage';
+import { AuthProvider } from '../providers/auth/auth';
+import { SocketProvider } from '../providers/socket/socket';
+import { AssignmentProvider } from '../providers/assignment/assignment';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { IonicStorageModule } from '@ionic/storage';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(Edumate, {
       mode: 'md',
       activator: 'none'
@@ -34,7 +38,9 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SocketService
+    AuthProvider,
+    SocketProvider,
+    AssignmentProvider,
   ]
 })
 export class AppModule {}
