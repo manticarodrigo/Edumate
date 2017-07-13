@@ -2,16 +2,22 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage({
-  name: 'search'
+  name: 'explore'
 })
 @Component({
-  selector: 'page-search',
-  templateUrl: 'search.html',
+  selector: 'page-explore',
+  templateUrl: 'explore.html',
 })
-export class SearchPage {
+export class ExplorePage {
+
+  user: any;
 
   constructor(public navCtrl: NavController) {
+    
+  }
 
+  optionsPressed() {
+    
   }
 
 }

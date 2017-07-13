@@ -14,14 +14,18 @@
         <ion-list inset>
           <ion-item>
             <ion-label><ion-icon name="person"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="email" placeholder="email" type="text"></ion-input>
+            <ion-input [(ngModel)]="email" placeholder="email{{ authMode == 'login' ? ' / username' : '' }}" type="text"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="authMode == 'register'">
+            <ion-label><ion-icon name="at"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="username" placeholder="username" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label><ion-icon name="lock"></ion-icon></ion-label>
             <ion-input [(ngModel)]="password" placeholder="password" type="password"></ion-input>
           </ion-item>
         </ion-list>
-        <button ion-button full (click)="login()" color="primary" class="login-button">{{ authMode }}</button>
+        <button ion-button full (click)="auth()" color="primary" class="login-button">{{ authMode }}</button>
       </ion-col>
     </ion-row>
   </div>

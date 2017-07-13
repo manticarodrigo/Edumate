@@ -2,20 +2,16 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage({
-  name: 'courses'
+  name: 'help'
 })
 @Component({
-  selector: 'page-courses',
-  templateUrl: 'courses.html',
+  selector: 'page-help',
+  templateUrl: 'help.html',
 })
-export class CoursesPage {
+export class HelpPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams) {
-  }
-
-  addCourse() {
-    
   }
 
 }

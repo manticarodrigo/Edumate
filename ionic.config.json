@@ -1,5 +1,11 @@
 {
   "name": "edumate",
   "app_id": "",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:8080/api"
+    }
+  ],
   "type": "ionic-angular"
 }

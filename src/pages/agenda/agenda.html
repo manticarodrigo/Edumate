@@ -1,12 +1,36 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Agenda</ion-title>
+    <ion-buttons class="profile-avatar" left>
+      <button ion-button menuToggle>
+        <img *ngIf="user && user.photoURL" [src]="user.photoURL"> 
+        <img src="assets/user-placeholder.png">
+      </button>
+    </ion-buttons>
+    <ion-segment [(ngModel)]="viewMode">
+      <ion-segment-button value="all">
+        ALL
+      </ion-segment-button>
+      <ion-segment-button value="upcoming">
+        UPCOMING
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons end>
+      <button ion-button icon-only class="add-button" (click)="addEntry()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let entry of entries">
+      {{ entry.title }}
+      <button ion-button color="danger" (click)="deleteEntry(entry)" end>
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

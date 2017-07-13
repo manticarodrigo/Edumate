@@ -13,7 +13,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { SocketProvider } from '../providers/socket/socket';
-import { AssignmentProvider } from '../providers/assignment/assignment';
+import { AgendaProvider } from '../providers/agenda/agenda';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { AssignmentProvider } from '../providers/assignment/assignment';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     SocketProvider,
-    AssignmentProvider,
+    AgendaProvider,
   ]
 })
 export class AppModule {}

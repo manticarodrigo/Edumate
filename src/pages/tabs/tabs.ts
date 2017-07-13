@@ -5,11 +5,9 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  tab1Root = 'search';
-  tab2Root = 'contacts';
+  tab1Root = 'explore';
   tab3Root = 'courses';
   tab4Root = 'agenda';
-  tab5Root = 'profile';
 
   constructor() {
   }

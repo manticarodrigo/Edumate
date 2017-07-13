@@ -1,26 +1,28 @@
 <ion-header>
+
   <ion-navbar>
-    <ion-buttons class="profile-avatar" left>
+     <ion-buttons class="profile-avatar" left>
       <button ion-button menuToggle>
         <img *ngIf="user && user.photoURL" [src]="user.photoURL"> 
         <img src="assets/user-placeholder.png">
       </button>
     </ion-buttons>
-      <ion-searchbar
+     <ion-searchbar
       class="search-bar"
       [(ngModel)]="searchInput"
       (ionInput)="updateSearch()"
       placeholder="Search for people, courses, etc.">
     </ion-searchbar>
     <ion-buttons end>
-      <button ion-button icon-only class="add-button" (click)="addCourse()">
-        <ion-icon name="add"></ion-icon>
+      <button ion-button icon-only class="options-button" (click)="optionsPressed()">
+        <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
 
-<ion-content>
+<ion-content text-center>
 
 </ion-content>

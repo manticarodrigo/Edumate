@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
 
@@ -15,6 +15,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginPage {
 
   email: string;
+  username: string;
   password: string;
   loading: any;
   authMode = 'login';
@@ -22,20 +23,30 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController,
               public authProvider: AuthProvider) {
   }
 
   ionViewDidLoad() {
     this.showLoader();
-    //Check if already authenticated
-    this.authProvider.checkAuthentication().then((res) => {
-      console.log("Already authorized");
+    // Check if already authenticated
+    this.authProvider.checkAuthentication()
+    .then(res => {
       this.loading.dismiss();
+      console.log("Already authorized - login");
       this.navCtrl.setRoot(TabsPage);
     }, (err) => {
-      console.log("Not already authorized");
       this.loading.dismiss();
+      console.log("Not already authorized - login");
     });
+  }
+
+  auth() {
+    if (this.authMode == 'login') {
+      this.login();
+    } else {
+      this.register();
+    }
   }
  
   login() {
@@ -44,17 +55,43 @@ export class LoginPage {
       email: this.email,
       password: this.password
     };
-    this.authProvider.login(credentials).then((result) => {
+    this.authProvider.login(credentials)
+    .then(result => {
       this.loading.dismiss();
       console.log(result);
       this.navCtrl.setRoot(TabsPage);
     }, (err) => {
       this.loading.dismiss();
       console.log(err);
+      if (err.status == 401) {
+        let alert = this.alertCtrl.create({
+          title: 'Login Failed',
+          message: 'Your login credentials are invalid',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      }
     });
-
   }
 
+  register() {
+    this.showLoader();
+    let details = {
+      email: this.email,
+      username: this.username,
+      password: this.password,
+      role: 'guest'
+    };
+    this.authProvider.createAccount(details)
+    .then(result => {
+      this.loading.dismiss();
+      console.log(result);
+      this.navCtrl.setRoot(TabsPage);
+    }, (err) => {
+      this.loading.dismiss();
+    });
+  }
+  
   showLoader() {
     this.loading = this.loadingCtrl.create({
         content: 'Authenticating...'
