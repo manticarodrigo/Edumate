@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -9,6 +10,7 @@ export class TabsPage {
   tab3Root = 'courses';
   tab4Root = 'agenda';
 
-  constructor() {
+  constructor(public menuCtrl: MenuController) {
+    this.menuCtrl.enable(true);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
 
@@ -16,18 +16,22 @@ export class LoginPage {
 
   email: string;
   username: string;
+  firstName: string;
+  lastName: string;
   password: string;
   loading: any;
   authMode = 'login';
-
+  shouldShowSplitPane = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
+              public menuCtrl: MenuController,
               public authProvider: AuthProvider) {
   }
 
   ionViewDidLoad() {
+    this.menuCtrl.enable(false);
     this.showLoader();
     // Check if already authenticated
     this.authProvider.checkAuthentication()
@@ -79,6 +83,8 @@ export class LoginPage {
     let details = {
       email: this.email,
       username: this.username,
+      firstName: this.firstName,
+      lastName: this.lastName,
       password: this.password,
       role: 'guest'
     };

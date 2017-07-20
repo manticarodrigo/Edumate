@@ -19,6 +19,9 @@ ion-navbar {
   .toolbar-background {
     background-color: color($colors, primary);
   }
+  .toolbar-title {
+    color: #fff;
+  }
   .profile-avatar {
     .bar-button {
       .button-inner {

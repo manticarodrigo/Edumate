@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, ModalController } from 'ionic-angular';
+import { Nav, Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -18,6 +18,7 @@ export class Edumate {
   constructor(private platform: Platform,
               private statusBar: StatusBar,
               private splashScreen: SplashScreen,
+              private modalCtrl: ModalController,
               public authProvider: AuthProvider) {
     // Sidemenu pages
     this.pages = [
@@ -46,7 +47,8 @@ export class Edumate {
   }
 
   openPage(page) {
-    this.nav.push(page.component);
+    let modal = this.modalCtrl.create(page.component);
+    modal.present();
   }
 
   logout() {

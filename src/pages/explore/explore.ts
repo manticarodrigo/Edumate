@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { AuthProvider } from '../../providers/auth/auth';
+
 @IonicPage({
   name: 'explore'
 })
@@ -12,7 +14,8 @@ export class ExplorePage {
 
   user: any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              public authProvider: AuthProvider) {
     
   }
 

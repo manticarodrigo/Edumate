@@ -1,37 +1,39 @@
-<ion-menu [content]="content">
-  <ion-content>
-    <div class="header">
-     <img *ngIf="authProvider.currentUser && authProvider.currentUser.photoURL" [src]="authProvider.currentUser.photoURL">
-     <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.photoURL" src="assets/user-placeholder.png">
-     <h4 *ngIf="authProvider.currentUser">
-      {{ authProvider.currentUser.email }}
-     </h4>
-     <p *ngIf="authProvider.currentUser">
-      @{{ authProvider.currentUser.username }}
-     </p>
-     <h4 *ngIf="!authProvider.currentUser">
-      Guest
-     </h4>
-     <p *ngIf="!authProvider.currentUser">
-      @guest
-     </p>
-   </div>
-    <hr>
-    <ion-list class="pages">
-      <button class="main-buttons" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon name="{{p.icon}}" item-start></ion-icon>
-        {{p.title}}
-      </button>
+<ion-split-pane>
+  <ion-menu [content]="content">
+    <ion-content>
+      <div class="header">
+      <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl">
+      <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/user-placeholder.png">
+      <h4 *ngIf="authProvider.currentUser">
+        {{ authProvider.currentUser.firstName }} {{ authProvider.currentUser.lastName }}
+      </h4>
+      <p *ngIf="authProvider.currentUser">
+        @{{ authProvider.currentUser.username }}
+      </p>
+      <h4 *ngIf="!authProvider.currentUser">
+        Guest
+      </h4>
+      <p *ngIf="!authProvider.currentUser">
+        @guest
+      </p>
+    </div>
       <hr>
-      <button class="other-buttons" menuClose ion-item (click)="openPage(helpPage)">
-        Help & Support
-      </button>
-      <button class="other-buttons" menuClose ion-item (click)="logout()">
-        Logout
-      </button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
+      <ion-list class="pages">
+        <button class="main-buttons" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon name="{{p.icon}}" item-start></ion-icon>
+          {{p.title}}
+        </button>
+        <hr>
+        <button class="other-buttons" menuClose ion-item (click)="openPage(helpPage)">
+          Help & Support
+        </button>
+        <button class="other-buttons" menuClose ion-item (click)="logout()">
+          Logout
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>

@@ -2,8 +2,8 @@
   <ion-navbar>
     <ion-buttons class="profile-avatar" left>
       <button ion-button menuToggle>
-        <img *ngIf="user && user.photoURL" [src]="user.photoURL"> 
-        <img src="assets/user-placeholder.png">
+        <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl"> 
+        <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/user-placeholder.png">
       </button>
     </ion-buttons>
     <ion-segment [(ngModel)]="viewMode">

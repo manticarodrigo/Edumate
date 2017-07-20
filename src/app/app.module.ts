@@ -12,8 +12,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { AuthProvider } from '../providers/auth/auth';
+import { UserProvider } from '../providers/user/user';
+import { TaskProvider } from '../providers/task/task';
 import { SocketProvider } from '../providers/socket/socket';
-import { AgendaProvider } from '../providers/agenda/agenda';
 
 @NgModule({
   declarations: [
@@ -39,8 +40,9 @@ import { AgendaProvider } from '../providers/agenda/agenda';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    SocketProvider,
-    AgendaProvider,
+    UserProvider,
+    TaskProvider,
+    SocketProvider
   ]
 })
 export class AppModule {}

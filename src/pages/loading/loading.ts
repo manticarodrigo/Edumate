@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
 
@@ -16,6 +16,7 @@ export class LoadingPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public menuCtrl: MenuController,
               public authProvider: AuthProvider) {
     // Check if already authenticated
     this.authProvider.checkAuthentication()
@@ -27,6 +28,8 @@ export class LoadingPage {
     });
   }
 
-  
+  ionViewDidLoad() {
+    this.menuCtrl.enable(false);
+  }
 
 }

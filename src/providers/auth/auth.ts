@@ -34,6 +34,15 @@ export class AuthProvider {
       });
     });
   }
+
+  setCurrentUser(user) {
+    this.currentUser = user;
+    var data = {
+      token: this.token,
+      user: user
+    }
+    this.storage.set('data', data);
+  }
  
   createAccount(details) {
 		return new Promise((resolve, reject) => {

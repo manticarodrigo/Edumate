@@ -1,18 +1,50 @@
-<!--
-  Generated template for the Profile page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-
+  <div class="profile-header">
+    <img *ngIf="user.imageUrl" [src]="user.imageUrl">
+    <img *ngIf="!user.imageUrl" src="assets/user-placeholder.png">
+    <ion-spinner *ngIf="uploading" name="dots"></ion-spinner>
+    <input type="file" accept="image/*" #file (change)="fileChanged($event)" style="visibility:hidden" />
+    <button ion-button class="image-upload" type="button" (click)="file.click()"> <!-- cordova: (click)="presentActionSheet()" -->
+        <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+    <ion-list class="names">
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input [(ngModel)]="user.firstName" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input [(ngModel)]="user.lastName" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Email Address</ion-label>
+      <ion-input [(ngModel)]="user.email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input [(ngModel)]="user.username" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <button ion-button type="button" (click)="dismiss()">
+    Dismiss
+  </button>
+  <button ion-button type="button" (click)="save()">
+    Save
+  </button>
+</ion-footer>
