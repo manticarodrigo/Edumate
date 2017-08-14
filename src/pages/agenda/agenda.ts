@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
-import { AgendaProvider } from '../../providers/agenda/agenda';
+import { TaskProvider } from '../../providers/task/task';
 
 @IonicPage({
   name: 'agenda'
@@ -14,7 +14,7 @@ import { AgendaProvider } from '../../providers/agenda/agenda';
 export class AgendaPage {
 
   viewMode = 'all';
-  entries: any;
+  tasks: any;
   loading: any;
   
   constructor(public navCtrl: NavController,
@@ -22,19 +22,19 @@ export class AgendaPage {
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
               public authProvider: AuthProvider,
-              public agendaProvider: AgendaProvider) {
+              public taskProvider: TaskProvider) {
   }
 
   ionViewDidLoad() {
-    this.agendaProvider.getEntries()
+    this.taskProvider.getTasks()
     .then((data) => {
-      this.entries = data;
+      this.tasks = data;
     }, (err) => {
       console.log("not allowed");
     });
   }
  
-  addEntry() {
+  addTask() {
     let prompt = this.alertCtrl.create({
       title: 'Add Entry',
       message: 'Describe your entry below:',
@@ -49,13 +49,13 @@ export class AgendaPage {
         },
         {
           text: 'Save',
-          handler: (entry) => {
-            if (entry) {
+          handler: (task) => {
+            if (task) {
               this.showLoader();
-              this.agendaProvider.createEntry(entry)
+              this.taskProvider.createTask(task)
               .then(result => {
                 this.loading.dismiss();
-                this.entries = result;
+                this.tasks = result;
                 console.log("todo created");
               }, (err) => {
                 this.loading.dismiss();
@@ -71,15 +71,15 @@ export class AgendaPage {
  
   }
  
-  deleteEntry(entry) {
+  deleteTask(task) {
     this.showLoader();
     //Remove from database
-    this.agendaProvider.deleteEntry(entry._id).then(result => {
+    this.taskProvider.deleteTask(task._id).then(result => {
       this.loading.dismiss();
       //Remove locally
-      let index = this.entries.indexOf(entry);
+      let index = this.tasks.indexOf(task);
       if (index > -1) {
-        this.entries.splice(index, 1);
+        this.tasks.splice(index, 1);
       }
     }, (err) => {
       this.loading.dismiss();

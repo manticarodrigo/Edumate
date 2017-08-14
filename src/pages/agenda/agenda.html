@@ -15,7 +15,7 @@
       </ion-segment-button>
     </ion-segment>
     <ion-buttons end>
-      <button ion-button icon-only class="add-button" (click)="addEntry()">
+      <button ion-button icon-only class="add-button" (click)="addTask()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -25,9 +25,9 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let entry of entries">
-      {{ entry.title }}
-      <button ion-button color="danger" (click)="deleteEntry(entry)" end>
+    <ion-item *ngFor="let task of tasks">
+      {{ task.title }}
+      <button ion-button color="danger" (click)="deleteTask(task)" end>
         <ion-icon name="trash"></ion-icon>
         Delete
       </button>
