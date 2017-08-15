@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -40,6 +41,7 @@ import { FeedProvider } from '../providers/feed/feed';
   providers: [
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     UserProvider,

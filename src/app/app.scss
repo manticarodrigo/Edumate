@@ -15,6 +15,12 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../assets/fonts/Ubuntu-Regular.ttf) format('truetype');
+  font-weight: normal;
+}
+
 ion-navbar {
   .toolbar-background {
     background-color: color($colors, primary);
@@ -58,6 +64,9 @@ ion-tabs {
   .tabbar {
     border-top: none !important;
   }
+  .tab-button-text {
+    font-weight: 700;
+  }
 }
 
 ion-menu {
@@ -85,10 +94,19 @@ ion-menu {
     }
   }
   .pages {
+    ion-icon {
+      color: color($colors, primary);
+    }
+    .main-buttons {
+      .item-inner {
+        font-weight: 500;
+      }
+    }
     .other-buttons {
       border-bottom: none !important;
       .item-inner {
         border-bottom: none;
+        
       }
     }
   }

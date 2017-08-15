@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { FeedProvider } from '../../providers/feed/feed';
@@ -16,6 +17,7 @@ export class ExplorePage {
   posts: any;
 
   constructor(public navCtrl: NavController,
+              public iab: InAppBrowser,
               public authProvider: AuthProvider,
               public feedProvider: FeedProvider) {
     this.feedProvider.getPosts()
@@ -28,8 +30,9 @@ export class ExplorePage {
     });
   }
 
-  openPost(post) {
-
+  openSharedPost(sharedPost) {
+    console.log('opening sharedPost');
+    const browser = this.iab.create(sharedPost.link, '_blank');
   }
 
   optionsPressed() {

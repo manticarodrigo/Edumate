@@ -16,7 +16,7 @@ export class FeedProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Authorization', this.authProvider.token);
-      this.http.get(this.authProvider.api + '/feed/' + 'mathematics', {headers: headers})
+      this.http.get(this.authProvider.api + '/feed/' + 'tech', {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         resolve(data);
