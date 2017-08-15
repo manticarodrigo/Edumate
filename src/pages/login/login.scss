@@ -17,10 +17,11 @@ page-login {
     }
     .login-form {
       .segment {
-        background-color: color($colors, primary-darker);
         border-radius: 2px;
         .segment-button {
-          background-color: rgba(255,255,255,0);
+          background-color: color($colors, primary-darker);
+          height: 40px;
+          line-height: 40px;
           color: #fff;
           border-bottom: none;
         }
@@ -33,11 +34,15 @@ page-login {
       }
       .list {
         margin: 10px 0px;
+        .item {
+          padding-left: 0px;
+        }
         .label {
           margin-left: 20px;
         }
       }
       .login-button {
+        text-transform: capitalize;
         border-radius: 2px;
         background-color: color($colors, secondary);
       }
@@ -45,42 +50,5 @@ page-login {
         background-color: color($colors, secondary-darker);
       }
     }
-  }
-  .item-md.item-input.input-has-focus .item-inner {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .list-md .item-input.input-has-focus:last-child {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .list-md .item-input.input-has-focus:last-child .item-inner {
-    box-shadow: none;
-  }
-
-  .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner {
-    box-shadow: none;
-  }
-
-  .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
   }
 }

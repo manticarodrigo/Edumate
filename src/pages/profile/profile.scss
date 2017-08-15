@@ -1,14 +1,4 @@
 page-profile {
-  ion-navbar {
-    .bar-buttons {
-      .bar-button {
-        color: #fff;
-      }
-      .bar-button:hover {
-        color: rgba(255,255,255,0.5);
-      }
-    }
-  }
   .profile-header {
     position: relative;
     padding: 20px;
@@ -47,7 +37,7 @@ page-profile {
     .button {
       margin: 0px 0px;
       padding: 0px 0px !important;
-      height: 100%;
+      height: 101%;
       border-radius: 0px;
       width: 50%;
     }

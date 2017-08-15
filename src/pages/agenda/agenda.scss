@@ -1,10 +1,11 @@
 page-agenda {
   ion-navbar {
     .segment {
-      background-color: color($colors, primary-darker);
       border-radius: 2px;
       .segment-button {
-        background-color: rgba(255,255,255,0);
+        height: 35px;
+        line-height: 35px;
+        background-color: color($colors, primary-darker);
         color: #fff;
         border-bottom: none;
       }
@@ -14,12 +15,6 @@ page-agenda {
         border-bottom: 2px solid rgba(255,255,255,0.25) !important;
         border-radius: 2px;
       }
-    }
-    .add-button {
-      color: #fff;
-    }
-    .add-button:hover {
-      color: rgba(255,255,255,0.5) !important;
     }
   }
 }

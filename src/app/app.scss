@@ -18,6 +18,7 @@
 ion-navbar {
   .toolbar-background {
     background-color: color($colors, primary);
+    border-bottom: none !important;
   }
   .toolbar-title {
     color: #fff;
@@ -34,11 +35,37 @@ ion-navbar {
       }
     }
   }
+  .bar-buttons {
+    .bar-button {
+      color: #fff;
+    }
+    .bar-button:hover {
+      color: rgba(255,255,255,0.5);
+    }
+  }
+
+  ion-searchbar .searchbar-input {
+    background-color: #fff !important;
+    height: 35px !important;
+  }
+
+  ion-searchbar .searchbar-search-icon {
+    top: 12px !important;
+  }
+}
+
+ion-tabs {
+  .tabbar {
+    border-top: none !important;
+  }
 }
 
 ion-menu {
+  hr {
+    display: none;
+  }
   .header {
-    height: 50px;
+    height: 60px;
     img {
       position: absolute;
       top: 12px;
@@ -58,12 +85,8 @@ ion-menu {
     }
   }
   .pages {
-    .main-buttons:nth-of-type(4) {
-      .item-inner {
-        border-bottom: none;
-      }
-    }
     .other-buttons {
+      border-bottom: none !important;
       .item-inner {
         border-bottom: none;
       }

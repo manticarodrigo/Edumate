@@ -25,8 +25,9 @@ import { SocketProvider } from '../providers/socket/socket';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(Edumate, {
-      mode: 'md',
-      activator: 'none'
+      mode: 'ios',
+      iconMode: 'md',
+      spinner: 'dots'
     }),
     IonicStorageModule.forRoot()
   ],

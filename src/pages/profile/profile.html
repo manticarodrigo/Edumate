@@ -13,7 +13,7 @@
   <div class="profile-header">
     <img *ngIf="user.imageUrl" [src]="user.imageUrl">
     <img *ngIf="!user.imageUrl" src="assets/user-placeholder.png">
-    <ion-spinner *ngIf="uploading" name="dots"></ion-spinner>
+    <ion-spinner *ngIf="uploading"></ion-spinner>
     <input type="file" accept="image/*" #file (change)="fileChanged($event)" style="visibility:hidden" />
     <button ion-button class="image-upload" type="button" (click)="file.click()"> <!-- cordova: (click)="presentActionSheet()" -->
         <ion-icon name="cloud-upload"></ion-icon>

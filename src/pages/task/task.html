@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Task</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input [(ngModel)]="task.name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-input [(ngModel)]="task.description" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Type</ion-label>
+      <ion-select [(ngModel)]="task.type" interface="popover" [selectOptions]="{mode:ios}" mode="ios">
+        <ion-option value="reminder">Reminder</ion-option>
+        <ion-option value="assignment">Assignment</ion-option>
+        <ion-option value="project">Project</ion-option>
+        <ion-option value="exam">Exam</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Course</ion-label>
+      <ion-input [(ngModel)]="task.course_id" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Start Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YY/HH/MM" [(ngModel)]="task.startDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>End Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YY/HH/MM" [(ngModel)]="task.endDate"></ion-datetime>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-button type="button" (click)="dismiss()">
+    Dismiss
+  </button>
+  <button ion-button type="button" (click)="save()">
+    Save
+  </button>
+</ion-footer>

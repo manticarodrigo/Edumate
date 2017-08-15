@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, LoadingController } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { TaskProvider } from '../../providers/task/task';
@@ -19,6 +19,7 @@ export class AgendaPage {
   
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
               public authProvider: AuthProvider,
@@ -35,40 +36,22 @@ export class AgendaPage {
   }
  
   addTask() {
-    let prompt = this.alertCtrl.create({
-      title: 'Add Entry',
-      message: 'Describe your entry below:',
-      inputs: [
-        {
-          name: 'title'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
-          handler: (task) => {
-            if (task) {
-              this.showLoader();
-              this.taskProvider.createTask(task)
-              .then(result => {
-                this.loading.dismiss();
-                this.tasks = result;
-                console.log("todo created");
-              }, (err) => {
-                this.loading.dismiss();
-                console.log("not allowed");
-              });
-            }
-          }
-        }
-      ]
+    let modal = this.modalCtrl.create('task');
+    modal.onDidDismiss(task => {
+      if (task) {
+        this.showLoader();
+        this.taskProvider.createTask(task)
+        .then(result => {
+          this.loading.dismiss();
+          this.tasks = result;
+          console.log("todo created");
+        }, (err) => {
+          this.loading.dismiss();
+          console.log("not allowed");
+        });
+      }
     });
- 
-    prompt.present();
- 
+    modal.present();
   }
  
   deleteTask(task) {
