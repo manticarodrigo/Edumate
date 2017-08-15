@@ -15,6 +15,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { TaskProvider } from '../providers/task/task';
 import { SocketProvider } from '../providers/socket/socket';
+import { FeedProvider } from '../providers/feed/feed';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SocketProvider } from '../providers/socket/socket';
     AuthProvider,
     UserProvider,
     TaskProvider,
-    SocketProvider
+    SocketProvider,
+    FeedProvider
   ]
 })
 export class AppModule {}

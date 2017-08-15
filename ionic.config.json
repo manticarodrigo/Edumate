@@ -7,5 +7,6 @@
       "proxyUrl": "http://localhost:8080/api"
     }
   ],
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }

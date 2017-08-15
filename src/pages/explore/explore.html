@@ -26,8 +26,9 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let post of posts" (click)="openPost(post)">
+      <img *ngIf="post.img" [src]="post.img">
       <h3>{{ post.title }}</h3>
-      <p>{{ post.description }}</p>
+      <p>{{ post.text }}</p>
     </ion-item>
   </ion-list>
 </ion-content>
