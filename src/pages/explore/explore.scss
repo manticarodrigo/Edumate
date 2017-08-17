@@ -1,21 +1,35 @@
 page-explore {
   .scroll-content {
     background-color: color($colors, light);
-    padding: 50px 10px 10px;
+    padding: 10px;
   }
   .write-post {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 5px 10px;
-    background-color: #fff;
-    z-index: 5;
+    position: relative;
+    width: 100%;
     box-shadow: 0px 20px 20px -20px rgba(0, 0, 0, 0.3);
-    height: 50px;
+    background-color: #fff;
+    border-radius: 2px;
+    ion-textarea {
+      padding: 5px 10px;
+      resize: none;
+      height: 50px;
+    }
+    button {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      margin: 10px;
+      height: 30px;
+    }
+  }
+  .writing-post {
+    ion-textarea {
+      height: 100px;
+    }
   }
   .post {
     padding: 10px 20px 20px 70px;
-    max-width: 500px;
+    // max-width: 500px;
     margin: 10px auto;
     border-radius: 2px;
     box-shadow: 0px 20px 20px -20px rgba(0, 0, 0, 0.3);
@@ -31,17 +45,21 @@ page-explore {
       border-radius: 100%;
     }
     .shared-post {
+      background-color: #fff;
       border: 2px solid color($colors, light);
       margin-top: 10px;
       padding: 10px;
       border-radius: 2px;
       white-space: normal;
+      height: auto;
+      text-align: left;
+      color: #000;
+      .button-inner {
+        display: block;
+      }
       img {
         max-width: 150px;
       }
-    }
-    .shared-post:hover {
-      background-color: rgba(0, 0, 0, 0.05);
     }
     .item-inner {
       border-bottom: none !important;

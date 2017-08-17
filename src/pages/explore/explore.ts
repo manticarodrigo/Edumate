@@ -15,6 +15,7 @@ import { FeedProvider } from '../../providers/feed/feed';
 export class ExplorePage {
 
   posts: any;
+  writingPost = false;
 
   constructor(public navCtrl: NavController,
               public iab: InAppBrowser,
@@ -28,6 +29,14 @@ export class ExplorePage {
     .catch(err => {
       console.log(err);
     });
+  }
+
+  writePostBlurred() {
+    this.writingPost = false;
+  }
+
+  writePostFocused() {
+    this.writingPost = true;
   }
 
   openSharedPost(sharedPost) {

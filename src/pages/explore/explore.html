@@ -24,17 +24,20 @@
 
 
 <ion-content>
-  <ion-textarea class="write-post" type="text" placeholder="Share something new."></ion-textarea>
+  <div class="write-post" [class.writing-post]="writingPost">
+    <ion-textarea (ionBlur)="writePostBlurred()" (ionFocus)="writePostFocused()" placeholder="Share something new..."></ion-textarea>
+    <button ion-button type="button">POST</button>
+  </div>
   <ion-list>
     <ion-item class="post" *ngFor="let post of posts">
       <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="avatar">
       <h2 *ngIf="post.firstName">{{ post.firstName }} {{ post.lastName }}</h2>
       <p *ngIf="post.text">{{ post.text }}</p>
-      <div class="shared-post" (click)="openSharedPost(post.sharedPost)">
+      <button ion-button type="button" class="shared-post" (click)="openSharedPost(post.sharedPost)">
         <img *ngIf="post.sharedPost.img" [src]="post.sharedPost.img">
         <h3>{{ post.sharedPost.title }}</h3>
         <p>{{ post.sharedPost.text }}</p>
-      </div>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>
