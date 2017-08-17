@@ -45,7 +45,7 @@ export class ExplorePage {
   }
 
   optionsPressed() {
-    
+    this.navCtrl.push('interests');
   }
 
 }

@@ -5,5 +5,19 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let node of interests; let i=index" text-wrap (click)="toggleSubLevel('idx'+i)" [class.active]="isSubLevelShown('idx'+i)">
+      <h4>
+        {{ node.name }}
+        <ion-icon color="success" item-right [name]="isSubLevelShown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+      </h4>
+      <ion-list *ngIf="isSubLevelShown('idx'+i)">
+        <ion-item *ngFor="let subNode of node.subs" text-wrap>
+          <h5>
+            {{subNode}}
+          </h5>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,0 +1,55 @@
+[
+  {
+    "name": "Arts",
+    "subs": [
+      "Performing arts",
+      "Visual arts"
+    ]
+  },
+  {
+    "name": "Humanities",
+    "subs": [
+      "Geography",
+      "History",
+      "Languages and literature",
+      "Philosophy",
+      "Theology"
+    ]
+  },
+  {
+    "name": "Social sciences",
+    "subs": [
+      "Anthropology",
+      "Economics",
+      "Law",
+      "Political science",
+      "Psychology",
+      "Sociology"
+    ]
+  },
+  {
+    "name": "Natural sciences",
+    "subs": [
+      "Biology",
+      "Chemistry",
+      "Earth sciences",
+      "Space sciences",
+      "Physics"
+    ]
+  },
+  {
+    "name": "Formal sciences",
+    "subs": [
+      "Computer Science",
+      "Mathematics",
+      "Statistics"
+    ]
+  },
+  {
+    "name": "Applied sciences",
+    "subs": [
+      "Engineering",
+      "Medicine and health sciences"
+    ]
+  }
+]

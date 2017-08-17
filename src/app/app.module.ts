@@ -5,6 +5,7 @@ import { Edumate } from './app.component';
 
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { TooltipsModule } from 'ionic-tooltips';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,7 +33,8 @@ import { InterestsProvider } from '../providers/interests/interests';
       iconMode: 'md',
       spinner: 'dots'
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    TooltipsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

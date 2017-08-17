@@ -26,7 +26,15 @@
 <ion-content>
   <div class="write-post" [class.writing-post]="writingPost">
     <ion-textarea (ionBlur)="writePostBlurred()" (ionFocus)="writePostFocused()" placeholder="Share something new..."></ion-textarea>
-    <button ion-button type="button">POST</button>
+    <button ion-button tooltip="Start a poll" >
+      <ion-icon name="stats"></ion-icon>
+    </button>
+    <button ion-button>
+      <ion-icon name="attach"></ion-icon>
+    </button>
+    <button *ngIf="writingPost" ion-button>
+      <ion-icon name="send"></ion-icon>
+    </button>
   </div>
   <ion-list>
     <ion-item class="post" *ngFor="let post of posts">

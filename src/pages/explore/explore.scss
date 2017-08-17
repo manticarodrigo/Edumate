@@ -17,9 +17,18 @@ page-explore {
     button {
       position: absolute;
       bottom: 0px;
-      right: 0px;
       margin: 10px;
       height: 30px;
+      width: 40px;
+    }
+    button:nth-last-of-type(1) {
+      right: 0px;
+    }
+    button:nth-last-of-type(2) {
+      right: 50px;
+    }
+    button:nth-last-of-type(3) {
+      right: 100px;
     }
   }
   .writing-post {
