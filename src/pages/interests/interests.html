@@ -6,16 +6,37 @@
 
 <ion-content>
   <ion-list>
+    <ion-item class="intro">
+      <h3>Checkmark topics and sub-topics that you want to follow.</h3>
+      <p>These items will allow us to curate posts on the explore page to best suit your personal interests.</p>
+    </ion-item>
     <ion-item *ngFor="let node of interests; let i=index" text-wrap (click)="toggleSubLevel('idx'+i)" [class.active]="isSubLevelShown('idx'+i)">
       <h4>
         {{ node.name }}
-        <ion-icon color="success" item-right [name]="isSubLevelShown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+        <ion-icon color="success" item-right [name]="isSubLevelShown('idx'+i) ? 'ios-arrow-forward' : 'ios-arrow-down'"></ion-icon>
       </h4>
+      <button ion-button item-end>
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </button>
       <ion-list *ngIf="isSubLevelShown('idx'+i)">
-        <ion-item *ngFor="let subNode of node.subs" text-wrap>
+        <ion-item *ngFor="let subNode of node.subs; let i2=index" text-wrap text-wrap (click)="toggleSubSubLevel('idx'+i+'idx'+i2)" [class.active]="isSubSubLevelShown('idx'+i+'idx'+i2)">
           <h5>
-            {{subNode}}
+            {{ subNode.name }}
+            <ion-icon color="success" item-right [name]="isSubSubLevelShown('idx'+i) ? 'ios-arrow-forward' : 'ios-arrow-down'"></ion-icon>
           </h5>
+          <button ion-button item-end>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </button>
+          <ion-list *ngIf="isSubSubLevelShown('idx'+i+'idx'+i2)">
+            <ion-item *ngFor="let subSubNode of subNode.subs" text-wrap>
+              <h5>
+              {{ subSubNode.name }}
+              </h5>
+              <button ion-button item-end>
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+              </button>
+            </ion-item>
+          </ion-list>
         </ion-item>
       </ion-list>
     </ion-item>

@@ -1,9 +1,30 @@
 page-interests {
+  
   .list {
+    .intro {
+      text-align: center;
+      box-shadow: 0px 20px 20px -20px rgba(0, 0, 0, 0.3);
+      overflow: normal;
+    }
+    .item {
+      border-top: none !important;
+      border-bottom: none !important;
+    }
     .item .item-inner {
+      border: none;
       h4 {
         font-weight: 700;
       }
+      button {
+        background-color: rgba(255, 255, 255, 0);
+        ion-icon {
+          color: #999999;
+          font-size: 25px;
+        }
+      }
+    }
+    .active {
+      background-color: color($colors, light);
     }
   }
 }

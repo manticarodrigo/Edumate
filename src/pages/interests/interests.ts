@@ -12,7 +12,8 @@ import { InterestsProvider } from '../../providers/interests/interests';
 })
 export class InterestsPage {
   interests: any;
-  showSubLevel = null;
+  showSubLevel = 'idx0';
+  showSubSubLevel = null;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -32,8 +33,22 @@ export class InterestsPage {
     }
   }
 
+  toggleSubSubLevel(idx) {
+    if (this.isSubSubLevelShown(idx)) {
+      this.showSubLevel = null;
+      this.showSubSubLevel = null;
+    } else {
+      this.showSubLevel = idx;
+      this.showSubSubLevel = idx;
+    }
+  };
+
   isSubLevelShown(idx) {
     return this.showSubLevel === idx;
   }
+
+  isSubSubLevelShown(idx) {
+    return this.showSubSubLevel === idx;
+  };
 
 }
