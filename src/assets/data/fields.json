@@ -12,6 +12,9 @@
             "name": "Anthropological linguistics"
           },
           {
+            "name": "Archaeology"
+          },
+          {
             "name": "Biological anthropology"
           },
           {
@@ -227,6 +230,9 @@
             "name": "African religions"
           },
           {
+            "name": "Other religions"
+          },
+          {
             "name": "Comparative religion"
           },
           {
@@ -241,31 +247,44 @@
         "name": "The arts",
         "subs": [
           {
-            "name": "Music"
+            "name": "Performing arts",
+            "subs": [
+              {
+                "name": "Literature"
+              },
+              {
+                "name": "Music"
+              },
+              {
+                "name": "Dance"
+              },
+              {
+                "name": "Television"
+              },
+              {
+                "name": "Theatre"
+              },
+              {
+                "name": "Film"
+              },
+              {
+                "name": "Oral literature"
+              }
+            ]
           },
           {
-            "name": "Dance"
-          },
-          {
-            "name": "Television"
-          },
-          {
-            "name": "Theatre"
-          },
-          {
-            "name": "Film"
-          },
-          {
-            "name": "Oral literature"
-          },
-          {
-            "name": "Fine arts"
-          },
-          {
-            "name": "Graphic arts"
-          },
-          {
-            "name": "Sculpture"
+            "name": "Visual arts",
+            "subs": [
+              {
+                "name": "Fine arts"
+              },
+              {
+                "name": "Graphic arts"
+              },
+              {
+                "name": "Sculpture"
+              }
+            ]
           }
         ]
       }
@@ -459,37 +478,16 @@
         "name": "Interdisciplinary studies",
         "subs": [
           {
-            "name": "Feminine psychology"
+            "name": "Area studies"
           },
           {
-            "name": "Gender studies"
+            "name": "Ethnics and cultural studies"
           },
           {
-            "name": "Heterosexism"
+            "name": "Gender and sexuality studies"
           },
           {
-            "name": "Human sexual behavior"
-          },
-          {
-            "name": "Human sexuality"
-          },
-          {
-            "name": "Masculine psychology"
-          },
-          {
-            "name": "Men's studies"
-          },
-          {
-            "name": "Queer studies"
-          },
-          {
-            "name": "Sex education"
-          },
-          {
-            "name": "Sexology"
-          },
-          {
-            "name": "Women's studies"
+            "name": "Organizational studies"
           }
         ]
       },
@@ -1649,12 +1647,6 @@
           },
           {
             "name": "Artificial intelligence"
-          },
-          {
-            "name": "mathematics"
-          },
-          {
-            "name": "social sciences"
           }
         ]
       },
