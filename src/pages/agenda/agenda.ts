@@ -25,7 +25,8 @@ export class AgendaPage {
               public authProvider: AuthProvider,
               public taskProvider: TaskProvider) {
     this.taskProvider.getTasks()
-    .then((data) => {
+    .then(data => {
+      console.log(data);
       this.tasks = data;
     }, (err) => {
       console.log(err);

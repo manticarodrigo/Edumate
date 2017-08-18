@@ -27,7 +27,7 @@ export class InterestsProvider {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authProvider.token);
-      this.http.post(this.authProvider.api + '/interest', JSON.stringify(interest), {headers: headers})
+      this.http.post(this.authProvider.api + '/interest/' + this.authProvider.currentUser._id, JSON.stringify(interest), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
         resolve(res);

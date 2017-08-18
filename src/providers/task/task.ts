@@ -16,7 +16,7 @@ export class TaskProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Authorization', this.authProvider.token);
-      this.http.get(this.authProvider.api + '/task', {headers: headers})
+      this.http.get(this.authProvider.api + '/task/' + this.authProvider.currentUser._id, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         resolve(data);
@@ -31,7 +31,7 @@ export class TaskProvider {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authProvider.token);
-      this.http.post(this.authProvider.api + '/task', JSON.stringify(task), {headers: headers})
+      this.http.post(this.authProvider.api + '/task/' + this.authProvider.currentUser._id, JSON.stringify(task), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
         resolve(res);

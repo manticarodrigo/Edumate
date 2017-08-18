@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { AuthProvider } from '../../providers/auth/auth';
 import { InterestsProvider } from '../../providers/interests/interests';
 
 @IonicPage({
@@ -17,6 +18,7 @@ export class InterestsPage {
   interestsMap = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public authProvider: AuthProvider,
               public interestsProvider: InterestsProvider) {
     this.interestsProvider.getFields()
     .subscribe(response => {
@@ -53,24 +55,39 @@ export class InterestsPage {
     this.interests[i].checked = !this.interests[i].checked;
     let interest = {
       name: this.interests[i].name,
-      path: null
+      path: null,
+      userId: this.authProvider.currentUser._id
     }
+    this.interestsProvider.submitInterest(interest)
+    .then(interests => {
+      this.interests = interests;
+    });
   }
 
   checkedSubNode(i, i2) {
     this.interests[i].subs[i2].checked = !this.interests[i].subs[i2].checked;
     let interest = {
       name: this.interests[i].subs[i2].name,
-      path: ',' + this.interests[i].name + ','
+      path: ',' + this.interests[i].name + ',',
+      userId: this.authProvider.currentUser._id
     }
+    this.interestsProvider.submitInterest(interest)
+    .then(interests => {
+      this.interests = interests;
+    });
   }
 
   checkedSubSubNode(i, i2, i3) {
     this.interests[i].subs[i2].subs[i3].checked = !this.interests[i].subs[i2].subs[i3].checked;
     let interest = {
       name: this.interests[i].subs[i2].subs[i3].name,
-      path: ',' + this.interests[i].name + ',' + this.interests[i].subs[i2].name + ','
+      path: ',' + this.interests[i].name + ',' + this.interests[i].subs[i2].name + ',',
+      userId: this.authProvider.currentUser._id
     }
+    this.interestsProvider.submitInterest(interest)
+    .then(interests => {
+      this.interests = interests;
+    });
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
+import { AuthProvider } from '../../providers/auth/auth';
+
 @IonicPage({
   name: 'task'
 })
@@ -16,7 +18,8 @@ export class TaskPage {
     type: 'reminder',
     course_id: '',
     startDate: null,
-    endDate: null
+    endDate: null,
+    user_id: null
   };
 
   startDate = null;
@@ -24,7 +27,9 @@ export class TaskPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public authProvider: AuthProvider) {
+    this.task.user_id = this.authProvider.currentUser._id;
     let task = this.navParams.get('task');
     if (task) {
       this.task = task;
