@@ -18,7 +18,7 @@ export class InterestsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public interestsProvider: InterestsProvider) {
-    this.interestsProvider.getInterests()
+    this.interestsProvider.getFields()
     .subscribe(response => {
         this.interests = response;
         console.log(this.interests);
@@ -51,14 +51,26 @@ export class InterestsPage {
 
   checkedNode(i) {
     this.interests[i].checked = !this.interests[i].checked;
+    let interest = {
+      name: this.interests[i].name,
+      path: null
+    }
   }
 
   checkedSubNode(i, i2) {
     this.interests[i].subs[i2].checked = !this.interests[i].subs[i2].checked;
+    let interest = {
+      name: this.interests[i].subs[i2].name,
+      path: ',' + this.interests[i].name + ','
+    }
   }
 
   checkedSubSubNode(i, i2, i3) {
     this.interests[i].subs[i2].subs[i3].checked = !this.interests[i].subs[i2].subs[i3].checked;
+    let interest = {
+      name: this.interests[i].subs[i2].subs[i3].name,
+      path: ',' + this.interests[i].name + ',' + this.interests[i].subs[i2].name + ','
+    }
   }
 
 }

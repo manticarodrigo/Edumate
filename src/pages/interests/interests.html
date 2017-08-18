@@ -25,7 +25,7 @@
           <h5>
             {{ subNode.name }}
           </h5>
-          <button ion-button (click)="toggleLevel2('idx'+i+'idx'+i2)">
+          <button ion-button *ngIf="interests[i].subs[i2].subs" (click)="toggleLevel2('idx'+i+'idx'+i2)">
               <ion-icon [name]="isLevel2Shown('idx'+i+'idx'+i2) ? 'ios-arrow-up' : 'ios-arrow-down'"></ion-icon>
           </button>
           <button ion-button (click)="checkedSubNode(i, i2)" [class.checked]="interests[i].subs[i2].checked == true">

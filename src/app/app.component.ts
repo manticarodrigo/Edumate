@@ -14,7 +14,6 @@ export class Edumate {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = 'loading';
   pages: any;
-  helpPage = {component: 'help'};
   constructor(private platform: Platform,
               private statusBar: StatusBar,
               private splashScreen: SplashScreen,
@@ -23,7 +22,6 @@ export class Edumate {
     // Sidemenu pages
     this.pages = [
       { title: 'Profile', component: 'profile', icon: 'person' },
-      { title: 'Settings', component: 'settings', icon: 'settings' },
       { title: 'Contacts', component: 'contacts', icon: 'chatbubbles'},
       { title: 'Grades', component: 'grades', icon: 'checkbox-outline'}
     ];

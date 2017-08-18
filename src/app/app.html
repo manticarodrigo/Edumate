@@ -2,33 +2,33 @@
   <ion-menu [content]="content">
     <ion-content>
       <div class="header">
-      <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl">
-      <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/user-placeholder.png">
-      <h4 *ngIf="authProvider.currentUser">
-        {{ authProvider.currentUser.firstName }} {{ authProvider.currentUser.lastName }}
-      </h4>
-      <p *ngIf="authProvider.currentUser">
-        @{{ authProvider.currentUser.username }}
-      </p>
-      <h4 *ngIf="!authProvider.currentUser">
-        Guest
-      </h4>
-      <p *ngIf="!authProvider.currentUser">
-        @guest
-      </p>
-    </div>
+        <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl">
+        <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/user-placeholder.png">
+        <h4 *ngIf="authProvider.currentUser">
+          {{ authProvider.currentUser.firstName }} {{ authProvider.currentUser.lastName }}
+        </h4>
+        <p *ngIf="authProvider.currentUser">
+          @{{ authProvider.currentUser.username }}
+        </p>
+        <h4 *ngIf="!authProvider.currentUser">
+          Guest
+        </h4>
+        <p *ngIf="!authProvider.currentUser">
+          @guest
+        </p>
+        <button ion-button class="settings-button" (click)="openPage({component: 'settings'})">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+      </div>
       <hr>
       <ion-list class="pages">
         <button class="main-buttons" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon name="{{p.icon}}" item-start></ion-icon>
-          {{p.title}}
+          <ion-icon name="{{ p.icon }}" item-start></ion-icon>
+          {{ p.title }}
         </button>
         <hr>
-        <button class="other-buttons" menuClose ion-item (click)="openPage(helpPage)">
+        <button class="other-buttons" menuClose ion-item (click)="openPage({component: 'help'})">
           Help & Support
-        </button>
-        <button class="other-buttons" menuClose ion-item (click)="logout()">
-          Logout
         </button>
       </ion-list>
     </ion-content>

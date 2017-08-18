@@ -137,22 +137,28 @@ ion-tabs {
 
 ion-menu {
   hr {
-    display: none;
+    height: 1px !important;
   }
   .header {
-    height: 60px;
-    img {
+    .settings-button {
       position: absolute;
       top: 12px;
       right: 16px;
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
+    }
+    img {
+      margin-top: 16px;
+      margin-left: 16px;
+      width: 45px;
+      height: 45px;
       object-fit: cover;
       border-radius: 100%;
     }
     h4 {
-      font-weight: 500;
-      margin: 16px 16px 0px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin: 8px 16px 0px;
     }
     p {
       margin: 0px 16px 16px;
@@ -161,11 +167,14 @@ ion-menu {
   }
   .pages {
     ion-icon {
-      color: color($colors, primary);
+      color: #000;
     }
     .main-buttons {
+      border-top: none !important;
       .item-inner {
-        font-weight: 500;
+        border-bottom: none;
+        font-weight: 400;
+        background-image: none;
       }
     }
     .other-buttons {
@@ -173,6 +182,7 @@ ion-menu {
       .item-inner {
         border-bottom: none;
         font-weight: 100;
+        background-image: none;
       }
     }
   }
