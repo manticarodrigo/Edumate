@@ -5,21 +5,52 @@ page-interests {
       text-align: center;
       box-shadow: 0px 20px 20px -20px rgba(0, 0, 0, 0.3);
       overflow: normal;
+      background-color: color($colors, primary-darker);
+      padding: 20px;
+      h2, p {
+        color: #fff;
+        max-width: 350px;
+        margin: auto;
+        white-space: normal;
+      }
+      h2 {
+        font-weight: 900;
+      }
+      p {
+        font-size: 0.75em;
+        opacity: 0.65;
+      }
     }
     .item {
       border-top: none !important;
       border-bottom: none !important;
     }
     .item .item-inner {
+      position: relative;
       border: none;
-      h4 {
+      h4, h5 {
         font-weight: 700;
+        padding: 10px;
       }
       button {
+        position: absolute;
+        top: 10px;
         background-color: rgba(255, 255, 255, 0);
         ion-icon {
           color: #999999;
           font-size: 25px;
+        }
+      }
+      button:nth-last-of-type(1) {
+        right: 10px;
+      }
+      button:nth-last-of-type(2) {
+        right: 40px;
+        padding-left: 100%;
+      }
+      .checked {
+        ion-icon {
+          color: color($colors, secondary);
         }
       }
     }

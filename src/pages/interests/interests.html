@@ -7,32 +7,36 @@
 <ion-content>
   <ion-list>
     <ion-item class="intro">
-      <h3>Checkmark topics and sub-topics that you want to follow.</h3>
+      <h2>Checkmark topics and sub-topics that you want to follow.</h2>
       <p>These items will allow us to curate posts on the explore page to best suit your personal interests.</p>
     </ion-item>
-    <ion-item *ngFor="let node of interests; let i=index" text-wrap (click)="toggleSubLevel('idx'+i)" [class.active]="isSubLevelShown('idx'+i)">
+    <ion-item *ngFor="let node of interests; let i=index" text-wrap [class.active]="isLevel1Shown('idx'+i)">
       <h4>
         {{ node.name }}
-        <ion-icon color="success" item-right [name]="isSubLevelShown('idx'+i) ? 'ios-arrow-forward' : 'ios-arrow-down'"></ion-icon>
       </h4>
-      <button ion-button item-end>
+      <button ion-button (click)="toggleLevel1('idx'+i)">
+          <ion-icon [name]="isLevel1Shown('idx'+i) ? 'ios-arrow-up' : 'ios-arrow-down'"></ion-icon>
+      </button>
+      <button ion-button (click)="checkedNode(i)" [class.checked]="interests[i].checked == true">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
       </button>
-      <ion-list *ngIf="isSubLevelShown('idx'+i)">
-        <ion-item *ngFor="let subNode of node.subs; let i2=index" text-wrap text-wrap (click)="toggleSubSubLevel('idx'+i+'idx'+i2)" [class.active]="isSubSubLevelShown('idx'+i+'idx'+i2)">
+      <ion-list *ngIf="isLevel1Shown('idx'+i)">
+        <ion-item *ngFor="let subNode of node.subs; let i2=index" text-wrap text-wrap [class.active]="isLevel2Shown('idx'+i+'idx'+i2)">
           <h5>
             {{ subNode.name }}
-            <ion-icon color="success" item-right [name]="isSubSubLevelShown('idx'+i) ? 'ios-arrow-forward' : 'ios-arrow-down'"></ion-icon>
           </h5>
-          <button ion-button item-end>
+          <button ion-button (click)="toggleLevel2('idx'+i+'idx'+i2)">
+              <ion-icon [name]="isLevel2Shown('idx'+i+'idx'+i2) ? 'ios-arrow-up' : 'ios-arrow-down'"></ion-icon>
+          </button>
+          <button ion-button (click)="checkedSubNode(i, i2)" [class.checked]="interests[i].subs[i2].checked == true">
             <ion-icon name="checkmark-circle-outline"></ion-icon>
           </button>
-          <ion-list *ngIf="isSubSubLevelShown('idx'+i+'idx'+i2)">
-            <ion-item *ngFor="let subSubNode of subNode.subs" text-wrap>
+          <ion-list *ngIf="isLevel2Shown('idx'+i+'idx'+i2)">
+            <ion-item *ngFor="let subSubNode of subNode.subs; let i3=index" text-wrap>
               <h5>
-              {{ subSubNode.name }}
+                {{ subSubNode.name }}
               </h5>
-              <button ion-button item-end>
+              <button ion-button (click)="checkedSubSubNode(i, i2, i3)" [class.checked]="interests[i].subs[i2].subs[i3].checked == true">
                 <ion-icon name="checkmark-circle-outline"></ion-icon>
               </button>
             </ion-item>

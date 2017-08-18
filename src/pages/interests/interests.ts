@@ -12,9 +12,9 @@ import { InterestsProvider } from '../../providers/interests/interests';
 })
 export class InterestsPage {
   interests: any;
-  showSubLevel = 'idx0';
-  showSubSubLevel = null;
-
+  showLevel1 = null;
+  showLevel2 = null;
+  interestsMap = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public interestsProvider: InterestsProvider) {
@@ -25,30 +25,40 @@ export class InterestsPage {
     });
   }
 
-  toggleSubLevel(idx) {
-    if (this.isSubLevelShown(idx)) {
-      this.showSubLevel = null;
+  toggleLevel1(idx) {
+    if (this.isLevel1Shown(idx)) {
+      this.showLevel1 = null;
     } else {
-      this.showSubLevel = idx;
+      this.showLevel1 = idx;
     }
   }
 
-  toggleSubSubLevel(idx) {
-    if (this.isSubSubLevelShown(idx)) {
-      this.showSubLevel = null;
-      this.showSubSubLevel = null;
+  toggleLevel2(idx) {
+    if (this.isLevel2Shown(idx)) {
+      this.showLevel2 = null;
     } else {
-      this.showSubLevel = idx;
-      this.showSubSubLevel = idx;
+      this.showLevel2 = idx;
     }
-  };
-
-  isSubLevelShown(idx) {
-    return this.showSubLevel === idx;
   }
 
-  isSubSubLevelShown(idx) {
-    return this.showSubSubLevel === idx;
-  };
+  isLevel1Shown(idx) {
+    return this.showLevel1 === idx;
+  }
+  
+  isLevel2Shown(idx) {
+    return this.showLevel2 === idx;
+  }
+
+  checkedNode(i) {
+    this.interests[i].checked = !this.interests[i].checked;
+  }
+
+  checkedSubNode(i, i2) {
+    this.interests[i].subs[i2].checked = !this.interests[i].subs[i2].checked;
+  }
+
+  checkedSubSubNode(i, i2, i3) {
+    this.interests[i].subs[i2].subs[i3].checked = !this.interests[i].subs[i2].subs[i3].checked;
+  }
 
 }
