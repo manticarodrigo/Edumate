@@ -25,6 +25,54 @@ export class InterestsPage {
         this.interests = response;
         console.log(this.interests);
     });
+    this.interestsProvider.getInterests()
+    .subscribe(response => {
+      console.log(response);
+      for (var num = 0; num < response.length; num++) {
+        let interest = response[num];
+        if (interest.path) {
+          var path: String = interest.path;
+          var nodeArr = path.slice(0, 1).slice(path.length - 1, 1).split(',');
+          var level = nodeArr.length;
+          console.log(nodeArr);
+          console.log(level);
+          if (level == 2) {
+            for (var i = 0; i < this.interests.length; i++) {
+              if (this.interests[i].name == nodeArr[0]) {
+                for (var i2 = 0; i2 < this.interests[i].length; i++) {
+                  if (this.interests[i].subs[i2].name == nodeArr[1]) {
+                    for (var i3 = 0; i3 < this.interests[i].subs[i2].length; i++) {
+                      if (this.interests[i].subs[i2].subs[i3].name == nodeArr[2]) {
+                        this.interests[i].subs[i2].subs[i3].checked = true;
+                        break;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            for (var i = 0; i < this.interests.length; i++) {
+              if (this.interests[i].name == nodeArr[0]) {
+                for (var i2 = 0; i2 < this.interests[i].length; i++) {
+                  if (this.interests[i].subs[i2].name == nodeArr[1]) {
+                    this.interests[i].subs[i2].checked = true;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          for (var i = 0; i < this.interests.length; i++) {
+            if (this.interests[i].name == interest.name) {
+              this.interests[i].checked = true;
+              break;
+            }
+          }
+        }
+      }
+    });
   }
 
   toggleLevel1(idx) {
@@ -56,12 +104,9 @@ export class InterestsPage {
     let interest = {
       name: this.interests[i].name,
       path: null,
-      userId: this.authProvider.currentUser._id
+      user_id: this.authProvider.currentUser._id
     }
-    this.interestsProvider.submitInterest(interest)
-    .then(interests => {
-      this.interests = interests;
-    });
+    this.interestsProvider.submitInterest(interest);
   }
 
   checkedSubNode(i, i2) {
@@ -69,12 +114,9 @@ export class InterestsPage {
     let interest = {
       name: this.interests[i].subs[i2].name,
       path: ',' + this.interests[i].name + ',',
-      userId: this.authProvider.currentUser._id
+      user_id: this.authProvider.currentUser._id
     }
-    this.interestsProvider.submitInterest(interest)
-    .then(interests => {
-      this.interests = interests;
-    });
+    this.interestsProvider.submitInterest(interest);
   }
 
   checkedSubSubNode(i, i2, i3) {
@@ -82,12 +124,9 @@ export class InterestsPage {
     let interest = {
       name: this.interests[i].subs[i2].subs[i3].name,
       path: ',' + this.interests[i].name + ',' + this.interests[i].subs[i2].name + ',',
-      userId: this.authProvider.currentUser._id
+      user_id: this.authProvider.currentUser._id
     }
-    this.interestsProvider.submitInterest(interest)
-    .then(interests => {
-      this.interests = interests;
-    });
+    this.interestsProvider.submitInterest(interest);
   }
 
 }
