@@ -22,57 +22,73 @@ export class InterestsPage {
               public interestsProvider: InterestsProvider) {
     this.interestsProvider.getFields()
     .subscribe(response => {
-        this.interests = response;
-        console.log(this.interests);
+      console.log(response);
+      this.interests = response;
     });
     this.interestsProvider.getInterests()
     .subscribe(response => {
       console.log(response);
-      for (var num = 0; num < response.length; num++) {
-        let interest = response[num];
-        if (interest.path) {
-          var path: String = interest.path;
-          var nodeArr = path.slice(0, 1).slice(path.length - 1, 1).split(',');
-          var level = nodeArr.length;
-          console.log(nodeArr);
-          console.log(level);
-          if (level == 2) {
-            for (var i = 0; i < this.interests.length; i++) {
-              if (this.interests[i].name == nodeArr[0]) {
-                for (var i2 = 0; i2 < this.interests[i].length; i++) {
-                  if (this.interests[i].subs[i2].name == nodeArr[1]) {
-                    for (var i3 = 0; i3 < this.interests[i].subs[i2].length; i++) {
-                      if (this.interests[i].subs[i2].subs[i3].name == nodeArr[2]) {
-                        this.interests[i].subs[i2].subs[i3].checked = true;
-                        break;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          } else {
-            for (var i = 0; i < this.interests.length; i++) {
-              if (this.interests[i].name == nodeArr[0]) {
-                for (var i2 = 0; i2 < this.interests[i].length; i++) {
-                  if (this.interests[i].subs[i2].name == nodeArr[1]) {
-                    this.interests[i].subs[i2].checked = true;
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        } else {
-          for (var i = 0; i < this.interests.length; i++) {
-            if (this.interests[i].name == interest.name) {
-              this.interests[i].checked = true;
-              break;
-            }
-          }
-        }
+      for (var i = 0; i < response.length; i++) {
+        let interest = response[i];
+        this.findTopLevel(interest);
       }
     });
+  }
+
+  findTopLevel(interest) {
+    for (var i = 0; i < this.interests.length; i++) {
+      const node = this.interests[i];
+      var path: String;
+      if (interest.path) {
+        // Remove off commas at string endpoints
+        path = interest.path.slice(1, -1);
+      }
+      // Add path strings
+      var pathArr: any;
+      if (path && path.split(',').length == 1) {
+        pathArr = [path];
+      } else if (path) {
+        pathArr = path.split(',');
+      }
+      console.log("looking for " + interest.name + " in " + node.name + ' with path ' + pathArr);
+      if (interest.name == node.name) {
+        node.checked = true;
+        console.log(node.name + " checked");
+        break;
+      } else if (pathArr && node.name == pathArr[0]) {
+        this.findSecondLevel(interest, node, pathArr);
+        break;
+      }
+    }
+  }
+
+  findSecondLevel(interest, node, pathArr) {
+    console.log(interest.name + " reached second level");
+    for (var i = 0; i < node.subs.length; i++) {
+      const subNode = node.subs[i];
+      if (interest.name == subNode.name) {
+        subNode.checked = true;
+        console.log(subNode.name + " checked");
+        break;
+      } else if (subNode.name == pathArr[1]) {
+        this.findThirdLevel(interest, subNode, pathArr);
+        break;
+      }
+    }
+  }
+
+  findThirdLevel(interest, node, pathArr) {
+    console.log(interest.name + " reached third level");
+    for (var i = 0; i < node.subs.length; i++) {
+      const subNode = node.subs[i];
+      if (interest.name == subNode.name) {
+        subNode.checked = true;
+        console.log(subNode.name + " checked");
+        break;
+      } else if (subNode.name == pathArr[2]) {
+        console.log("went too far");
+      }
+    }
   }
 
   toggleLevel1(idx) {
