@@ -50,10 +50,8 @@ export class InterestsPage {
       } else if (path) {
         pathArr = path.split(',');
       }
-      console.log("looking for " + interest.name + " in " + node.name + ' with path ' + pathArr);
       if (interest.name == node.name) {
         node.checked = true;
-        console.log(node.name + " checked");
         break;
       } else if (pathArr && node.name == pathArr[0]) {
         this.findSecondLevel(interest, node, pathArr);
@@ -63,12 +61,10 @@ export class InterestsPage {
   }
 
   findSecondLevel(interest, node, pathArr) {
-    console.log(interest.name + " reached second level");
     for (var i = 0; i < node.subs.length; i++) {
       const subNode = node.subs[i];
       if (interest.name == subNode.name) {
         subNode.checked = true;
-        console.log(subNode.name + " checked");
         break;
       } else if (subNode.name == pathArr[1]) {
         this.findThirdLevel(interest, subNode, pathArr);
@@ -78,15 +74,11 @@ export class InterestsPage {
   }
 
   findThirdLevel(interest, node, pathArr) {
-    console.log(interest.name + " reached third level");
     for (var i = 0; i < node.subs.length; i++) {
       const subNode = node.subs[i];
       if (interest.name == subNode.name) {
         subNode.checked = true;
-        console.log(subNode.name + " checked");
         break;
-      } else if (subNode.name == pathArr[2]) {
-        console.log("went too far");
       }
     }
   }
