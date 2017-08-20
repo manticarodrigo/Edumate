@@ -108,33 +108,48 @@ export class InterestsPage {
   }
 
   checkedNode(i) {
-    this.interests[i].checked = !this.interests[i].checked;
+    const node = this.interests[i];
+    node.checked = !node.checked;
     let interest = {
-      name: this.interests[i].name,
+      name: node.name,
       path: null,
       user_id: this.authProvider.currentUser._id
     }
-    this.interestsProvider.submitInterest(interest);
+    if (node.checked) {
+      this.interestsProvider.submitInterest(interest);
+    } else {
+      this.interestsProvider.removeInterest(interest.name);
+    }
   }
 
   checkedSubNode(i, i2) {
-    this.interests[i].subs[i2].checked = !this.interests[i].subs[i2].checked;
+    var node = this.interests[i].subs[i2];
+    node.checked = !node.checked;
     let interest = {
-      name: this.interests[i].subs[i2].name,
+      name: node.name,
       path: ',' + this.interests[i].name + ',',
       user_id: this.authProvider.currentUser._id
     }
-    this.interestsProvider.submitInterest(interest);
+    if (node.checked) {
+      this.interestsProvider.submitInterest(interest);
+    } else {
+      this.interestsProvider.removeInterest(interest.name);
+    }
   }
 
   checkedSubSubNode(i, i2, i3) {
-    this.interests[i].subs[i2].subs[i3].checked = !this.interests[i].subs[i2].subs[i3].checked;
+    const node = this.interests[i].subs[i2].subs[i3];
+    node.checked = !node.checked;
     let interest = {
-      name: this.interests[i].subs[i2].subs[i3].name,
+      name: node.name,
       path: ',' + this.interests[i].name + ',' + this.interests[i].subs[i2].name + ',',
       user_id: this.authProvider.currentUser._id
     }
-    this.interestsProvider.submitInterest(interest);
+    if (node.checked) {
+      this.interestsProvider.submitInterest(interest);
+    } else {
+      this.interestsProvider.removeInterest(interest.name);
+    }
   }
 
 }

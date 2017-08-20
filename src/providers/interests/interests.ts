@@ -44,4 +44,17 @@ export class InterestsProvider {
     });
   }
 
+  removeInterest(name) {
+    return new Promise((resolve, reject) => {
+        let headers = new Headers();
+        headers.append('Authorization', this.authProvider.token);
+        this.http.delete(this.authProvider.api + '/interest/' + this.authProvider.currentUser._id + '/' + name, {headers: headers})
+        .subscribe(res => {
+            resolve(res);
+        }, (err) => {
+            reject(err);
+        });    
+    });
+  }
+
 }
