@@ -18,6 +18,7 @@ import { TaskProvider } from '../providers/task/task';
 import { SocketProvider } from '../providers/socket/socket';
 import { FeedProvider } from '../providers/feed/feed';
 import { InterestsProvider } from '../providers/interests/interests';
+import { PostProvider } from '../providers/post/post';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { InterestsProvider } from '../providers/interests/interests';
     TaskProvider,
     SocketProvider,
     FeedProvider,
-    InterestsProvider
+    InterestsProvider,
+    PostProvider
   ]
 })
 export class AppModule {}

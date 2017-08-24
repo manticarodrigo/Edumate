@@ -13,13 +13,13 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class TaskPage {
 
   task = {
+    _author: null,
+    _course: null,
     name: '',
     description: '',
     type: 'reminder',
-    course_id: '',
     startDate: null,
-    endDate: null,
-    user_id: null
+    endDate: null
   };
 
   startDate = null;
@@ -29,7 +29,7 @@ export class TaskPage {
               public navParams: NavParams,
               public viewCtrl: ViewController,
               public authProvider: AuthProvider) {
-    this.task.user_id = this.authProvider.currentUser._id;
+    this.task._author = this.authProvider.currentUser._id;
     let task = this.navParams.get('task');
     if (task) {
       this.task = task;

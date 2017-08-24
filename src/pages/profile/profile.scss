@@ -9,12 +9,17 @@ page-profile {
       border-radius: 50%;
     }
     .spinner {
-      
+      position: absolute;
+      bottom: 60px;
+      left: 55px;
+    }
+    .spinner * {
+      fill: #fff;
     }
     .image-upload {
       position: absolute;
-      bottom: 8px;
-      left: 38px;
+      bottom: 40px;
+      left: 40px;
       background-color: rgba(255,255,255,0);
       box-shadow: none;
       ion-icon {

@@ -12,15 +12,15 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label floating>Name</ion-label>
-      <ion-input [(ngModel)]="task.name" type="text"></ion-input>
+      <ion-label stacked>Name</ion-label>
+      <ion-input [(ngModel)]="task.name" type="text" placeholder="Name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Description</ion-label>
-      <ion-input [(ngModel)]="task.description" type="text"></ion-input>
+      <ion-label stacked>Description</ion-label>
+      <ion-input [(ngModel)]="task.description" type="text" placeholder="Description"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Type</ion-label>
+      <ion-label stacked>Type</ion-label>
       <ion-select [(ngModel)]="task.type" interface="popover" [selectOptions]="{mode:ios}" mode="ios">
         <ion-option value="reminder">Reminder</ion-option>
         <ion-option value="assignment">Assignment</ion-option>
@@ -29,16 +29,16 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label floating>Course</ion-label>
-      <ion-input [(ngModel)]="task.course_id" type="text"></ion-input>
+      <ion-label stacked>Course</ion-label>
+      <ion-input [(ngModel)]="task._course" type="text" placeholder="Course"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Start Date</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY h:mm a" min="2016" max="2020" minuteValues="0,15,30,45" [(ngModel)]="startDate"></ion-datetime>
+      <ion-label stacked>Start Date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY h:mm a" min="2016" max="2020" minuteValues="0,15,30,45" [(ngModel)]="startDate" placeholder="MMM DD, YYYY h:mm a"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label floating>End Date</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY h:mm a" min="2016" max="2020" minuteValues="0,15,30,45" [(ngModel)]="endDate"></ion-datetime>
+      <ion-label stacked>End Date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY h:mm a" min="2016" max="2020" minuteValues="0,15,30,45" [(ngModel)]="endDate" placeholder="MMM DD, YYYY h:mm a"></ion-datetime>
     </ion-item>
   </ion-list>
 </ion-content>
