@@ -10,7 +10,7 @@ export class AuthProvider {
 	api = 'https://edumate-server.herokuapp.com/api';
   constructor(public http: Http,
               public storage: Storage) {
-    this.api = '/api';
+    // this.api = '/api';
   }
 
   checkAuthentication() {

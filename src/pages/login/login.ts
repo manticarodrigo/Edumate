@@ -86,7 +86,7 @@ export class LoginPage {
       firstName: this.firstName,
       lastName: this.lastName,
       password: this.password,
-      role: 'guest'
+      role: 'learner'
     };
     this.authProvider.createAccount(details)
     .then(result => {
