@@ -3,7 +3,7 @@
     <ion-content>
       <div class="header">
         <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl">
-        <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/user-placeholder.png">
+        <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/images/user-placeholder.png">
         <h4 *ngIf="authProvider.currentUser">
           {{ authProvider.currentUser.firstName }} {{ authProvider.currentUser.lastName }}
         </h4>

@@ -29,12 +29,12 @@ export class InterestsProvider {
     .map(res => res.json());
   }
 
-  submitInterest(interest) {
+  createInterest(interest) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authProvider.token);
-      this.http.post(this.authProvider.api + '/interest/' + this.authProvider.currentUser._id, JSON.stringify(interest), {headers: headers})
+      this.http.post(this.authProvider.api + '/interest', JSON.stringify(interest), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
         resolve(res);
@@ -44,7 +44,7 @@ export class InterestsProvider {
     });
   }
 
-  removeInterest(name) {
+  deleteInterest(name) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Authorization', this.authProvider.token);

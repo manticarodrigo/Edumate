@@ -1,13 +1,12 @@
 <ion-header>
 
   <ion-navbar>
-     <ion-buttons class="profile-avatar" left>
+    <ion-buttons class="profile-avatar" left>
       <button ion-button menuToggle>
-        <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl"> 
-        <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/user-placeholder.png">
+        <img [src]="authProvider.currentUser.imageUrl ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
       </button>
     </ion-buttons>
-     <ion-searchbar
+    <ion-searchbar
       class="search-bar"
       [(ngModel)]="searchInput"
       (ionInput)="updateSearch()"
@@ -25,24 +24,28 @@
 
 <ion-content>
   <div class="write-post" [class.writing-post]="writingPost">
-    <ion-textarea [(ngModel)]="post.text" (ionBlur)="writePostBlurred()" (ionFocus)="writePostFocused()" placeholder="Share something new..."></ion-textarea>
-    <button ion-button>
+    <ion-textarea [(ngModel)]="post.text" (ionFocus)="writePostFocused()" placeholder="{{ polling ? 'Ask a question...' : 'Share something new...'}}"></ion-textarea> <!-- (ionBlur)="writePostBlurred()" -->
+    <div *ngIf="polling" class="poll">
+      <ion-input *ngFor="let choice of poll.choices; let i=index" placeholder="Choice {{i + 1}}" [(ngModel)]="poll.choices[i].name">
+      </ion-input>
+    </div>
+    <button ion-button (click)="togglePoll()">
       <ion-icon name="stats"></ion-icon>
     </button>
     <button ion-button>
       <ion-icon name="attach"></ion-icon>
     </button>
-    <button *ngIf="writingPost" ion-button>
+    <button *ngIf="writingPost" ion-button (click)="createPost()">
       <ion-icon name="send"></ion-icon>
     </button>
   </div>
   <ion-list>
     <ion-item class="post" *ngFor="let post of posts">
-      <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="avatar">
-      <h2 *ngIf="post.firstName">{{ post.firstName }} {{ post.lastName }}</h2>
+      <img [src]="post._author.imageUrl ? post._author.imageUrl : 'assets/images/user-placeholder.png'" class="avatar">
+      <h2 *ngIf="post._author.firstName">{{ post._author.firstName }} {{ post._author.lastName }}</h2>
       <p *ngIf="post.text">{{ post.text }}</p>
-      <button ion-button type="button" class="shared-post" (click)="openSharedPost(post.sharedPost)">
-        <img *ngIf="post.sharedPost.img" [src]="post.sharedPost.img">
+      <button *ngIf="post.sharedPost" ion-button type="button" class="shared-post" (click)="openSharedPost(post.sharedPost)">
+        <img *ngIf="post.sharedPost.imageUrl" [src]="post.sharedPost.imageUrl">
         <h3>{{ post.sharedPost.title }}</h3>
         <p>{{ post.sharedPost.text }}</p>
       </button>

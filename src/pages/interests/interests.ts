@@ -116,9 +116,9 @@ export class InterestsPage {
       user_id: this.authProvider.currentUser._id
     }
     if (node.checked) {
-      this.interestsProvider.submitInterest(interest);
+      this.interestsProvider.createInterest(interest);
     } else {
-      this.interestsProvider.removeInterest(interest.name);
+      this.interestsProvider.deleteInterest(interest.name);
     }
   }
 
@@ -131,9 +131,9 @@ export class InterestsPage {
       user_id: this.authProvider.currentUser._id
     }
     if (node.checked) {
-      this.interestsProvider.submitInterest(interest);
+      this.interestsProvider.createInterest(interest);
     } else {
-      this.interestsProvider.removeInterest(interest.name);
+      this.interestsProvider.deleteInterest(interest.name);
     }
   }
 
@@ -146,9 +146,9 @@ export class InterestsPage {
       user_id: this.authProvider.currentUser._id
     }
     if (node.checked) {
-      this.interestsProvider.submitInterest(interest);
+      this.interestsProvider.createInterest(interest);
     } else {
-      this.interestsProvider.removeInterest(interest.name);
+      this.interestsProvider.deleteInterest(interest.name);
     }
   }
 

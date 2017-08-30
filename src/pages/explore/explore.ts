@@ -16,6 +16,7 @@ export class ExplorePage {
 
   posts: any;
   writingPost = false;
+  polling = false;
 
   post = {
     _author: '',
@@ -25,7 +26,7 @@ export class ExplorePage {
   }
 
   poll = {
-    choices: [{}],
+    choices: [{name: ''}, {name: ''}],
     startDate: null,
     endDate: null
   }
@@ -45,6 +46,10 @@ export class ExplorePage {
     });
   }
 
+  optionsPressed() {
+    this.navCtrl.push('interests');
+  }
+
   writePostBlurred() {
     this.writingPost = false;
   }
@@ -53,21 +58,29 @@ export class ExplorePage {
     this.writingPost = true;
   }
 
+  togglePoll() {
+    this.polling = !this.polling;
+  }
+
   openSharedPost(sharedPost) {
     const browser = this.iab.create(sharedPost.link, '_blank');
   }
 
-  optionsPressed() {
-    this.navCtrl.push('interests');
-  }
-
   createPost() {
-    if (this.poll.choices.length > 0) {
+    console.log("creating post");
+    if (this.poll.choices.length > 1) {
       this.post._poll = this.poll;
     }
     this.postProvider.createPost(this.post)
     .then(posts => {
       this.posts = posts;
+      this.post = {
+        _author: '',
+        _poll: null,
+        text: '',
+        attachmentUrl: null
+      }
+      this.writePostBlurred();
     });
   }
 
