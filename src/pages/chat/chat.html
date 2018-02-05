@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ contact ? contact.firstName : 'User' }}</ion-title>
+        <ion-buttons end>
+        <button ion-button icon-only (click)="dismiss()">
+            <ion-icon name="close-circle"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <p class="alert-text" *ngIf="!messages || messages.length < 1">No messages.</p>
+    <ion-list no-lines>
+        <ion-item *ngFor="let message of messages">
+            <div class="message-header">
+                <img [src]="contact.imageUrl ? contact.imageUrl : assets/images/user-placeholder.png">
+                <h4 *ngIf="memberMap[message.senderId]">{{ memberMap[message.senderId].firstName }}</h4>
+                <h4 *ngIf="!memberMap[message.senderId]">User</h4>
+                <!-- <p *ngIf="message.createdAtReadable">{{ message.createdAtReadable }}</p> -->
+            </div>
+            <div *ngIf="message.text" class="message-bubble">
+                <div class="message">{{ message.text }}</div>
+            </div>
+            <div *ngIf="message.imageUrl" class="img-bubble">
+                <a href="{{ message.imageUrl}}" target="_blank"> <!-- cordova: (click)="showImage(message.imageUrl)" -->
+                    <img [src]="message.imageUrl">
+                </a>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer class="chat-footer">
+  <form name="chat-form">
+    <input type="file" accept="image/*" #file (change)="fileChanged($event)" style="visibility:hidden" />
+    <button class="attach" type="button" (click)="file.click()"> <!-- cordova: (click)="presentActionSheet()" -->
+        <img src="assets/tmh/attach.png">
+    </button>
+    <div class="chat-message">
+        <ion-textarea type="text" name="chat-message" [(ngModel)]="message.text" placeholder="Enter a message" autocorrect="on"></ion-textarea>
+    </div>
+    <button ion-button class="send" type="button" (click)="send()">
+        SEND
+    </button>
+  </form>
+</ion-footer>

@@ -1,12 +1,40 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Contacts</ion-title>
-  </ion-navbar>
-
-</ion-header>
+    <ion-navbar>
+      <ion-title>Contacts</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="dismiss()">
+          <ion-icon name="close-circle"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 
 <ion-content>
 
+  <ion-list>
+
+    <ion-item text-center class="no-contacts" *ngIf="!contacts">
+      <h2>Hey <span *ngIf="this.authProvider.currentUser">, {{ this.authProvider.currentUser.firstName }}</span>.</h2>
+      <p>You haven't added a contact yet. We encourage you to add a new one now.
+      <button ion-button (click)="findContacts()" full>Find Contacts</button>
+    </ion-item>
+
+    <ion-card *ngFor="let contact of contacts" (click)="chatWithContact(contact)">
+      <ion-item detail-none>
+        <ion-avatar item-start>
+          <img [src]="contact.imageUrl" alt="contact profile image">
+        </ion-avatar>
+        <h2>{{ contact.firstName }} {{ contact.lastName }}</h2>
+        <h3 class="message">
+          Last message.
+        </h3>
+        <div item-end>
+          <ion-badge item-end>0</ion-badge>
+          <p >20/3/2017</p>
+        </div>
+      </ion-item>
+    </ion-card>
+  
+  </ion-list>
 </ion-content>

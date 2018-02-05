@@ -1,3 +1,32 @@
 page-courses {
-  
+  .course-card {
+    img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+    .instructor,
+    .rating {
+      min-height: 0;
+      ion-label,
+      ion-icon {
+        margin-top: 0 !important;
+      }
+    }
+    .rating {
+      ion-icon {
+        color: #f1f132;
+      }
+    }
+    .footer {
+      button {
+        color: color($colors, secondary);
+        ion-icon {
+          color: color($colors, secondary);
+        }
+      }
+      button:hover {
+        color: color($colors, secondary);
+      }
+    }
+  }
 }

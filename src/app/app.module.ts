@@ -10,35 +10,34 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-import { TabsPage } from '../pages/tabs/tabs';
-
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
+import { CourseProvider } from '../providers/course/course';
 import { TaskProvider } from '../providers/task/task';
-import { SocketProvider } from '../providers/socket/socket';
 import { FeedProvider } from '../providers/feed/feed';
 import { InterestsProvider } from '../providers/interests/interests';
 import { PostProvider } from '../providers/post/post';
 
+import { ConferenceData } from '../providers/conference-data';
+import { UserData } from '../providers/user-data';
+
 @NgModule({
   declarations: [
-    Edumate,
-    TabsPage
+    Edumate
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(Edumate, {
       mode: 'ios',
-      iconMode: 'md',
+      // iconMode: 'md',
       spinner: 'dots'
     }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    Edumate,
-    TabsPage
+    Edumate
   ],
   providers: [
     StatusBar,
@@ -47,11 +46,13 @@ import { PostProvider } from '../providers/post/post';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     UserProvider,
+    CourseProvider,
     TaskProvider,
-    SocketProvider,
     FeedProvider,
     InterestsProvider,
-    PostProvider
+    PostProvider,
+    ConferenceData,
+    UserData
   ]
 })
 export class AppModule {}

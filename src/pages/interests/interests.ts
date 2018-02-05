@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { InterestsProvider } from '../../providers/interests/interests';
@@ -18,6 +18,7 @@ export class InterestsPage {
   interestsMap = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public viewCtrl: ViewController,
               public authProvider: AuthProvider,
               public interestsProvider: InterestsProvider) {
     this.interestsProvider.getFields()
@@ -33,6 +34,10 @@ export class InterestsPage {
         this.findTopLevel(interest);
       }
     });
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
   findTopLevel(interest) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -13,29 +13,34 @@ import { PostProvider } from '../../providers/post/post';
   templateUrl: 'explore.html',
 })
 export class ExplorePage {
-
   posts: any;
   writingPost = false;
   polling = false;
-
   post = {
     _author: '',
     _poll: null,
     text: '',
     attachmentUrl: null
   }
-
   poll = {
     choices: [{name: ''}, {name: ''}],
     startDate: null,
     endDate: null
   }
 
-  constructor(public navCtrl: NavController,
-              public iab: InAppBrowser,
-              public authProvider: AuthProvider,
-              public postProvider: PostProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    public viewCtrl: ViewController,
+    public iab: InAppBrowser,
+    public authProvider: AuthProvider,
+    public postProvider: PostProvider
+  ) {
     this.post._author = this.authProvider.currentUser._id;
+    this.getPosts();
+  }
+
+  getPosts() {
     this.postProvider.getPosts()
     .then(posts => {
       console.log(posts);
@@ -47,7 +52,12 @@ export class ExplorePage {
   }
 
   optionsPressed() {
-    this.navCtrl.push('interests');
+    let modal = this.modalCtrl.create('interests');
+    modal.present();
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
   writePostBlurred() {

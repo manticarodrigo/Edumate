@@ -128,7 +128,7 @@ ion-navbar {
 
 ion-tabs {
   .tabbar {
-    border-top: 2px solid rgba(0, 0, 0, 0.05) !important;
+    border-top: 1px solid rgb(200, 199, 204) !important;
   }
   .tab-button-text {
     font-weight: 700;
@@ -136,8 +136,9 @@ ion-tabs {
 }
 
 ion-menu {
-  hr {
-    height: 1px !important;
+  border-right: 1px solid rgb(200, 199, 204) !important;
+  .list-ios {
+    margin-bottom: 9px !important;
   }
   .header {
     .settings-button {
@@ -177,13 +178,12 @@ ion-menu {
         background-image: none;
       }
     }
-    .other-buttons {
+  }
+  .other-buttons {
+    .item-inner {
       border-bottom: none !important;
-      .item-inner {
-        border-bottom: none;
-        font-weight: 100;
-        background-image: none;
-      }
+      font-weight: 100;
+      background-image: none !important;
     }
   }
 }
@@ -191,5 +191,27 @@ ion-menu {
 ion-segment {
   ion-segment-button {
     font-weight: 500;
+  }
+}
+
+ion-footer {
+  height: 50px;
+  .button {
+    margin: 0px 0px;
+    padding: 0px 0px !important;
+    height: 101%;
+    border-radius: 0px;
+    width: 50%;
+  }
+  .button:nth-of-type(1) {
+    background-color: #fff;
+    color: color($colors, primary);
+    box-shadow: none;
+  }
+  .button:nth-of-type(1):hover {
+    background-color: #fff;
+  }
+  .button:nth-of-type(2) {
+    float: right;
   }
 }

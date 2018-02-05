@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
-
-import { TabsPage } from '../tabs/tabs';
+import { IonicPage, NavController, NavParams, Events, LoadingController, AlertController } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -15,34 +13,34 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginPage {
 
   email: string;
+  password: string;
   username: string;
   firstName: string;
   lastName: string;
-  password: string;
   loading: any;
   authMode = 'login';
   shouldShowSplitPane = false;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
-              public menuCtrl: MenuController,
+              public events: Events,
               public authProvider: AuthProvider) {
   }
 
   ionViewDidLoad() {
-    this.menuCtrl.enable(false);
-    this.showLoader();
+    // this.showLoader();
     // Check if already authenticated
-    this.authProvider.checkAuthentication()
-    .then(res => {
-      this.loading.dismiss();
-      console.log("Already authorized - login");
-      this.navCtrl.setRoot(TabsPage);
-    }, (err) => {
-      this.loading.dismiss();
-      console.log("Not already authorized - login");
-    });
+    // this.authProvider.checkAuthentication()
+    // .then(res => {
+    //   console.log("Already authorized - login");
+    //   this.loading.dismiss();
+    //   this.events.publish('user:login');
+    // }, (err) => {
+    //   console.log("Not already authorized - login");
+    //   this.loading.dismiss();
+    // });
   }
 
   auth() {
@@ -63,7 +61,6 @@ export class LoginPage {
     .then(result => {
       this.loading.dismiss();
       console.log(result);
-      this.navCtrl.setRoot(TabsPage);
     }, (err) => {
       this.loading.dismiss();
       console.log(err);
@@ -82,17 +79,15 @@ export class LoginPage {
     this.showLoader();
     let details = {
       email: this.email,
+      password: this.password,
       username: this.username,
       firstName: this.firstName,
-      lastName: this.lastName,
-      password: this.password,
-      role: 'learner'
+      lastName: this.lastName
     };
     this.authProvider.createAccount(details)
     .then(result => {
       this.loading.dismiss();
       console.log(result);
-      this.navCtrl.setRoot(TabsPage);
     }, (err) => {
       this.loading.dismiss();
     });

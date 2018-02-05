@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-buttons class="profile-avatar" left>
       <button ion-button menuToggle>
-        <img [src]="authProvider.currentUser.imageUrl ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
+        <img [src]="authProvider.currentUser ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
       </button>
     </ion-buttons>
     <ion-searchbar
@@ -14,7 +14,7 @@
     </ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="optionsPressed()">
-        <ion-icon name="options"></ion-icon>
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -23,7 +23,8 @@
 
 
 <ion-content>
-  <div class="write-post" [class.writing-post]="writingPost">
+
+  <ion-card class="new-post" [class.writing-post]="writingPost">
     <ion-textarea [(ngModel)]="post.text" (ionFocus)="writePostFocused()" placeholder="{{ polling ? 'Ask a question...' : 'Share something new...'}}"></ion-textarea> <!-- (ionBlur)="writePostBlurred()" -->
     <div *ngIf="polling" class="poll">
       <ion-input *ngFor="let choice of poll.choices; let i=index" placeholder="Choice {{i + 1}}" [(ngModel)]="poll.choices[i].name">
@@ -38,17 +39,51 @@
     <button *ngIf="writingPost" ion-button (click)="createPost()">
       <ion-icon name="send"></ion-icon>
     </button>
-  </div>
+  </ion-card>
+
   <ion-list>
-    <ion-item class="post" *ngFor="let post of posts">
-      <img [src]="post._author.imageUrl ? post._author.imageUrl : 'assets/images/user-placeholder.png'" class="avatar">
-      <h2 *ngIf="post._author.firstName">{{ post._author.firstName }} {{ post._author.lastName }}</h2>
-      <p *ngIf="post.text">{{ post.text }}</p>
-      <button *ngIf="post.sharedPost" ion-button type="button" class="shared-post" (click)="openSharedPost(post.sharedPost)">
-        <img *ngIf="post.sharedPost.imageUrl" [src]="post.sharedPost.imageUrl">
-        <h3>{{ post.sharedPost.title }}</h3>
-        <p>{{ post.sharedPost.text }}</p>
-      </button>
-    </ion-item>
+    <ion-card *ngFor="let post of posts" class="post">
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="post._author ? post._author.imageUrl : 'assets/images/user-placeholder.png'">
+          </ion-avatar>
+          <h2 *ngIf="post._author.firstName">{{ post._author.firstName }} {{ post._author.lastName }}</h2>
+          <p>November 5, 1955</p>
+        </ion-item>
+      
+        <img *ngIf="post.image" [src]="post.image">
+      
+        <ion-card-content>
+            <p *ngIf="post.text">{{ post.text }}</p>
+            <button *ngIf="post.sharedPost" ion-button type="button" class="shared-post" (click)="openSharedPost(post.sharedPost)">
+              <img *ngIf="post.sharedPost.imageUrl" [src]="post.sharedPost.imageUrl">
+              <h3 *ngIf="post.sharedPost.title">{{ post.sharedPost.title }}</h3>
+              <p *ngIf="post.sharedPost.text">{{ post.sharedPost.text }}</p>
+            </button>
+        </ion-card-content>
+      
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>12 Likes</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div>4 Comments</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-note>
+              11h ago
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      
+      </ion-card>
   </ion-list>
+
 </ion-content>

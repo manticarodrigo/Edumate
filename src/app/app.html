@@ -1,39 +1,52 @@
 <ion-split-pane>
+
   <ion-menu [content]="content">
+
+    <ion-header class="header">
+      <ion-toolbar>
+          <img [src]="authProvider.currentUser ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
+          <h4>
+            {{ authProvider.currentUser ? authProvider.currentUser.firstName + ' ' + authProvider.currentUser.lastName : 'Guest' }}
+          </h4>
+          <p>
+            {{ authProvider.currentUser ? '@' + authProvider.currentUser.username : '@guest' }}
+          </p>
+          <button ion-button class="settings-button" (click)="createModal({component: 'settings'})">
+            <ion-icon name="settings"></ion-icon>
+          </button>
+      </ion-toolbar>
+    </ion-header>
+
     <ion-content>
-      <div class="header">
-        <img *ngIf="authProvider.currentUser && authProvider.currentUser.imageUrl" [src]="authProvider.currentUser.imageUrl">
-        <img *ngIf="!authProvider.currentUser || !authProvider.currentUser.imageUrl" src="assets/images/user-placeholder.png">
-        <h4 *ngIf="authProvider.currentUser">
-          {{ authProvider.currentUser.firstName }} {{ authProvider.currentUser.lastName }}
-        </h4>
-        <p *ngIf="authProvider.currentUser">
-          @{{ authProvider.currentUser.username }}
-        </p>
-        <h4 *ngIf="!authProvider.currentUser">
-          Guest
-        </h4>
-        <p *ngIf="!authProvider.currentUser">
-          @guest
-        </p>
-        <button ion-button class="settings-button" (click)="openPage({component: 'settings'})">
-          <ion-icon name="settings"></ion-icon>
-        </button>
-      </div>
-      <hr>
+
       <ion-list class="pages">
-        <button class="main-buttons" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon name="{{ p.icon }}" item-start></ion-icon>
+        <ion-list-header>
+          Navigate
+        </ion-list-header>
+        <button class="main-buttons" menuClose ion-item *ngFor="let p of appPages" (click)="openPage(p)">
+          <ion-icon [name]="p.icon" [color]="isActive(p)" item-start></ion-icon>
           {{ p.title }}
         </button>
-        <hr>
-        <button class="other-buttons" menuClose ion-item (click)="openPage({component: 'help'})">
-          Help & Support
+      </ion-list>
+
+      <ion-list class="pages">
+        <ion-list-header>
+          Account
+        </ion-list-header>
+        <button class="main-buttons" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon [name]="p.icon" [color]="isActive(p)" item-start></ion-icon>
+          {{ p.title }}
         </button>
       </ion-list>
+
+      <button class="other-buttons" menuClose ion-item (click)="createModal({component: 'help'})">
+        Help & Support
+      </button>
     </ion-content>
+
   </ion-menu>
 
   <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
   <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+
 </ion-split-pane>

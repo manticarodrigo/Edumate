@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="course">{{course.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="course">
+    <h1>{{course.name}}</h1>
+    <h4 *ngFor="let instructor of course?.instructors">
+    {{instructor.name}}
+  </h4>
+    <p>
+      {{course.timeStart}} - {{course.timeEnd}}
+    </p>
+    <p>{{course.location}}</p>
+    <p>{{course.description}}</p>
+  </div>
+</ion-content>  

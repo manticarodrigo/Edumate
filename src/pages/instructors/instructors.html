@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons class="profile-avatar" left>
+      <button ion-button menuToggle>
+        <img [src]="authProvider.currentUser.imageUrl ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
+      </button>
+    </ion-buttons>
+    <ion-searchbar
+      class="search-bar"
+      [(ngModel)]="searchInput"
+      (ionInput)="updateSearch()"
+      placeholder="Search for people, courses, etc.">
+    </ion-searchbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCourse()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content instructor-list">
+    <ion-list [virtualScroll]="instructors">
+      <ion-grid fixed>
+        <ion-row align-items-stretch>
+          <ion-col col-12 col-sm-4 align-self-stretch align-self-center *virtualItem="let instructor" approxItemHeight="457px">
+            <ion-card class="instructor-card">
+              <ion-card-header>
+                <ion-item detail-none>
+                  <ion-avatar item-start>
+                    <img [src]="instructor.profilePic" alt="instructor profile pic">
+                  </ion-avatar>
+                  <button class="name" (click)="goToInstructorDetail(instructor)">
+                    <h2>{{instructor.name}}</h2>
+                  </button>
+                  <button class="follow" (click)="followInstructor(instructor)">
+                    Follow
+                  </button>
+                </ion-item>
+              </ion-card-header>
+              <ion-card-content class="outer-content">
+                <ion-list>
+                  <button ion-item *ngFor="let course of instructor.courses" (click)="goToCourseDetail(course)">
+                    <h3>{{course.name}}</h3>
+                  </button>
+                </ion-list>
+              </ion-card-content>
+              <ion-row no-padding>
+                <ion-col col-12 col-lg-auto text-center text-lg-left>
+                  <button ion-button clear small color="primary" icon-start (click)="goToInstructorTwitter(instructor)">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                    Tweet
+                  </button>
+                </ion-col>
+                <ion-col col-12 col-lg-auto text-center>
+                  <button ion-button clear small color="primary" icon-start (click)="openInstructorShare(instructor)">
+                    <ion-icon name='share-alt'></ion-icon>
+                    Share
+                  </button>
+                </ion-col>
+                <ion-col col-12 col-lg-auto text-center text-lg-right>
+                  <button ion-button clear small color="primary" icon-start (click)="openContact(instructor)">
+                    <ion-icon name='chatboxes'></ion-icon>
+                    Contact
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </ion-content>

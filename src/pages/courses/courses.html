@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-buttons class="profile-avatar" left>
       <button ion-button menuToggle>
-        <img [src]="authProvider.currentUser.imageUrl ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
+        <img [src]="authProvider.currentUser ? authProvider.currentUser.imageUrl : 'assets/images/user-placeholder.png'">
       </button>
     </ion-buttons>
     <ion-searchbar
@@ -19,7 +19,65 @@
   </ion-navbar>
 </ion-header>
 
+<ion-content class="outer-content course-list">
+    <ion-list #courseList>
+      <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
 
-<ion-content>
+          <ion-item-divider>
+            <ion-label>
+              {{group.time}}
+            </ion-label>
+          </ion-item-divider>
 
-</ion-content>
+          <ion-grid fixed>
+              <ion-row align-items-stretch>
+                <ion-col col-12 col-sm-4 align-self-center *ngFor="let course of group.courses" approxItemHeight="457px">
+                  <ion-card class="course-card">
+      
+                    <img src="assets/img/wordpress-multisite.png">
+                    <ion-fab right top>
+                      <button ion-fab>
+                        <ion-icon name="code"></ion-icon>
+                      </button>
+                    </ion-fab>
+                  
+                    <ion-item class="course">
+                      <h2>{{course.name}}</h2>
+                      <p>{{course.description}}</p>
+                    </ion-item>
+                  
+                    <ion-item class="instructor" *ngFor="let instructor of course?.instructors">
+                      <ion-icon name="person" item-left large ></ion-icon>
+                      <h4>{{instructor.name}}</h4>
+                      <p>Software Engineer</p>
+                    </ion-item>
+      
+                    <ion-item class="rating">
+                      <ion-icon name="star" item-start small></ion-icon>
+                      <ion-icon name="star" item-start small></ion-icon>
+                      <ion-icon name="star" item-start small></ion-icon>
+                      <ion-icon name="star" item-start small></ion-icon>
+                      <ion-icon name="star" item-start small></ion-icon>
+                      <ion-label>(10050)</ion-label>
+                    </ion-item>
+                  
+                    <ion-item class="footer">
+                      <p item-left>FREE</p>
+                      <button ion-button clear small item-end color="primary" icon-start>
+                        <ion-icon name='share-alt'></ion-icon>
+                        Share
+                      </button>
+                      <button ion-button icon-left clear item-end (click)="goToCourseDetail(course)">
+                        <ion-icon name="navigate"></ion-icon>
+                        Start
+                      </button>
+                    </ion-item>
+      
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          
+      </ion-item-group>
+    </ion-list>
+  </ion-content>

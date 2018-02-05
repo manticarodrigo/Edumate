@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class AuthProvider {
   public token: any;
   public currentUser: any;
 	api = 'https://edumate-server.herokuapp.com/api';
-  constructor(public http: Http,
-              public storage: Storage) {
+  constructor(
+    public http: Http,
+    public events: Events,
+    public storage: Storage
+  ) {
     // proxy for development
     this.api = '/api';
   }
@@ -28,6 +33,7 @@ export class AuthProvider {
         this.http.get(this.api + '/auth/protected', {headers: headers})
         .subscribe(res => {
           console.log(res);
+          this.events.publish('user:reauth');
           resolve(res);
         }, (err) => {
           reject(err);
@@ -47,7 +53,7 @@ export class AuthProvider {
  
   createAccount(details) {
 		return new Promise((resolve, reject) => {
-			let headers = new Headers();
+      let headers = new Headers();
 			headers.append('Content-Type', 'application/json');
 			this.http.post(this.api + '/auth/register', JSON.stringify(details), {headers: headers})
       .subscribe(res => {
@@ -55,10 +61,11 @@ export class AuthProvider {
         this.storage.set('data', data);
         this.token = data.token;
         this.currentUser = data.user;
+        this.events.publish('user:register');
         resolve(data);
-      }, (err) => {
+      }, err => {
         reject(err);
-      });
+      })
 		});
   }
  
@@ -72,8 +79,9 @@ export class AuthProvider {
         this.storage.set('data', data);
         this.token = data.token;
         this.currentUser = data.user;
-        resolve(data);
-      }, (err) => {
+        this.events.publish('user:login');
+        resolve(res);
+      }, err => {
         reject(err);
       });
     });
@@ -82,6 +90,7 @@ export class AuthProvider {
   logout() {
     this.token = null;
     this.currentUser = null;
+    this.events.publish('user:logout');
     return this.storage.clear();
   }
 }

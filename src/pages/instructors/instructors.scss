@@ -1,0 +1,23 @@
+page-instructors {
+  .instructor-card {
+    ion-card-header {
+      .item {
+        padding: 4px 16px;
+      }
+      .name {
+        display: block;
+        padding-left: 0;
+        font-weight: bold !important;
+      }
+      .follow {
+        border-radius: 2px;
+        border: 2px solid color($colors, primary);
+        color: color($colors, primary);
+      }
+    }
+    ion-card-content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
